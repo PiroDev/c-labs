@@ -1,8 +1,8 @@
 #include <stdio.h>
 int main()
 {
-int s;
-s = 56;
-printf(Year has s weeks);
-return 0;
+    int s;
+    s = 56;
+    printf("Year has %d weeks", s);
+    return 0;
 }
