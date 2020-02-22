@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-int div(int a, int b);
+int div(long a, long b);
 
 int main()
 {
-	int a, d;
-	if ((scanf("%d %d", &a, &d) == 2) && (a >= 0) && (d > 0))
+	long a, d;
+	if ((scanf("%ld%ld", &a, &d) == 2) && (a >= 0) && (d > 0))
 	{	
-		int q, r;
+		long q, r;
 		if (a >= d)
 		{
 			q = div(a, d);
@@ -18,7 +18,7 @@ int main()
 			q = 0;
 			r = a;
 		}
-		printf("%d %d", q, r);
+		printf("%ld %ld", q, r);
 		return 0;
 	}
 	else
@@ -28,9 +28,9 @@ int main()
 	}
 }
 
-int div(int a, int b)
+int div(long a, long b)
 {
-	int n = 0;
+	long n = 0;
 	while (a >= b)
 	{
 		a -= b;
