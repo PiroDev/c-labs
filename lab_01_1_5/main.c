@@ -7,7 +7,7 @@ int main()
 	long a, d;
 	int rs;
 	rs = scanf("%ld%ld", &a, &d);
-	if ((rs == 2) && (a >= 0) && (d > 0))
+	if ((rs == 2) && (a > 0) && (d > 0))
 	{	
 		long q, r;
 		if (a >= d)
