@@ -8,7 +8,7 @@ int main()
 	if ((scanf("%d %d", &a, &d) == 2) && (a >= 0) && (d > 0))
 	{	
 		int q, r;
-		if (a > d)
+		if (a >= d)
 		{
 			q = div(a, d);
 			r = a - q * d;
