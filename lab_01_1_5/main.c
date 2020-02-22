@@ -4,8 +4,8 @@ int div(int a, int b);
 
 int main()
 {
-	int a, d;
-	if ((scanf("%d %d", &a, &d) == 2) && (a >= 0) && (d > 0))
+	int res, a, d;
+	if (((res = scanf("%d %d", &a, &d)) == 2) && (res != EOF) && (a >= 0) && (d > 0))
 	{	
 		int q, r;
 		if (a >= d)
