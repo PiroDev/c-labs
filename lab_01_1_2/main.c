@@ -1,7 +1,6 @@
+#define _USE_MATH_DEFINES
 #include <stdio.h>
 #include <math.h>
-
-#define M_PI 3.14159265
 
 int main()
 {
