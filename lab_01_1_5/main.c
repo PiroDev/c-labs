@@ -5,21 +5,24 @@ int div(long a, long b);
 int main()
 {
 	long a, d;
-	if ((scanf("%ld%ld", &a, &d) == 2) && (a >= 0) && (d > 0))
-	{	
-		long q, r;
-		if (a >= d)
-		{
-			q = div(a, d);
-			r = a - q * d;
+	if (scanf("%ld%ld", &a, &d) == 2)
+	{ 
+		if ((a >= 0) && (d > 0))
+		{	
+			long q, r;
+			if (a >= d)
+			{
+				q = div(a, d);
+				r = a - q * d;
+			}
+			else
+			{
+				q = 0;
+				r = a;
+			}
+			printf("%ld %ld", q, r);
+			return 0;
 		}
-		else
-		{
-			q = 0;
-			r = a;
-		}
-		printf("%ld %ld", q, r);
-		return 0;
 	}
 	else
 	{
