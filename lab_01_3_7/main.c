@@ -10,7 +10,7 @@ int main()
 {
 	float x, eps;
 	int rs = scanf("%f%f", &x, &eps);
-	if ((rs == 2) && (fabs(x) <= 1) && (eps > 0))
+	if ((rs == 2) && (fabs(x) < 1) && (eps > 0))
 	{
 		float s, f, x1;
 		int i, sign;
