@@ -2,9 +2,6 @@
 #include <math.h>
 
 float curr_x(float x, int i, int sign);
-float abs_inaccuracy(float s, float f);
-float rel_inaccuracy(float s, float f);
-
 
 int main()
 {
@@ -12,9 +9,8 @@ int main()
 	int rs = scanf("%f%f", &x, &eps);
 	if ((rs == 2) && (fabs(x) < 1) && (eps > 0))
 	{
-		float s, f, x1;
+		float s, x1;
 		int i, sign;
-		f = atan(x);
 		s = 0;
 		x1 = x;
 		i = 1;
@@ -26,7 +22,7 @@ int main()
 			sign *= -1;
 			x1 = x1 * x * x;
 		}
-		printf("%f %f %f %f", s, f, abs_inaccuracy(s, f), rel_inaccuracy(s, f));   
+		printf("%f", s);   
 	}
 	else
 	{
@@ -41,14 +37,4 @@ float curr_x(float x, int i, int sign)
 		return x;
 	else
 		return sign * x / (float)i;
-}
-
-float abs_inaccuracy(float s, float f)
-{
-	return fabsf(f - s);
-}
-
-float rel_inaccuracy(float s, float f)
-{
-	return fabsf((f - s) / f);
 }
