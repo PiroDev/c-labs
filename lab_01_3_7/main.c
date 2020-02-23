@@ -26,7 +26,7 @@ int main()
 			sign *= -1;
 			x1 = x1 * x * x;
 		}
-		printf("%.6f %.6f %.6f %.6f", s, f, abs_inaccuracy(s, f), rel_inaccuracy(s, f));   
+		printf("%f %f %f %f", s, f, abs_inaccuracy(s, f), rel_inaccuracy(s, f));   
 	}
 	else
 	{
