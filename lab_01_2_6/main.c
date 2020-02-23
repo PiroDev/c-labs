@@ -13,8 +13,7 @@ int main()
 	float x1, x2, x3, xa, y1, y2, y3, ya;
 	rs = scanf("%f%f%f%f%f%f%f%f", &x1, &y1, &x2, &y2, &x3, &y3, &xa, &ya);
 	if ((rs == 8) && !(is_line(x1, y1, x2, y2, x3, y3)))
-	{
-		
+	{	
 		float a, b, c;
 		a = vector(x1, xa, y2, y1, x2, ya);
 		b = vector(x2, xa, y3, y2, x3, ya);
