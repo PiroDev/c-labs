@@ -15,9 +15,12 @@ int main()
     int a[MAX_LEN];
     if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
     {
-        n -= deletion(n, a);
-        arr_output(n, a);
-        return 0;
+        int delt = deletion(n, a);
+        if (delt)
+        {
+            arr_output(n - delt, a);
+            return 0;
+        }
     }
     printf("Incorrect input!");
     return 1;
@@ -52,7 +55,7 @@ int is_sqare(int a)
         return 0;
     }
     int sq = (int) sqrt((double) a);
-    for (int i = sq - 1; i <= sq + 1; i++)
+    for (int i = sq; i <= sq + 1; i++)
     {
         if (i * i == a)
         {
