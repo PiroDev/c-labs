@@ -1,4 +1,6 @@
 *.exe
 *.o
+*.pro
+*.pro.user
 **/__debug__/**
 **/__release__/**
