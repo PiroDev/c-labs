@@ -52,12 +52,9 @@ int is_sqare(int a)
         return 0;
     }
     int sq = (int) sqrt((double) a);
-    for (int i = sq; i <= sq + 1; i++)
+    if (sq * sq == a)
     {
-        if (i * i == a)
-        {
-            return i;
-        }
+        return 1;
     }
     return 0;
 }
