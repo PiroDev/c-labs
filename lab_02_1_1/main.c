@@ -7,12 +7,12 @@ int odd_mltpl(int, int[]);
 
 int main()
 {
-    int N;
-    int res = scanf("%d", &N);
+    int n;
+    int res = scanf("%d", &n);
     int a[MAX_LEN];
-    if ((res) && (N <= 10) && (N >= 1) && (arr_input(N, a)))
+    if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
     {
-        res = odd_mltpl(N, a);
+        res = odd_mltpl(n, a);
         if (res)
         {
             printf("%d", res);
