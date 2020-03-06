@@ -52,7 +52,7 @@ int is_sqare(int a)
         return 0;
     }
     int sq = (int) sqrt((double) a);
-    if (sq * sq == a)
+    if ((sq * sq == a) || ((sq + 1) * (sq + 1) == a))
     {
         return 1;
     }
@@ -61,17 +61,29 @@ int is_sqare(int a)
 
 int deletion(int n, int a[])
 {
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    int cnt_all = 0; // количество полных квадратов (всего)
+    int cnt = 0; // количество полных квадратов текущее
+    int pos = 0; // счетчик элементов, которые находятся на своих местах
+    while (pos < n - cnt_all)
     {
-        if (is_sqare(a[i]))
+        if (is_sqare(a[pos + cnt]))
         {
+            cnt_all++;
             cnt++;
-            for (int j = i; j < n; j++)
+        }
+        else if (cnt > 0)
+        {
+            for (int j = pos; j < n - cnt; j++)
             {
-                a[j] = a[j + 1];
+                a[j] = a[j + cnt];
             }
+            pos++;
+            cnt = 0;
+        }
+        else
+        {
+            pos++;
         }
     }
-    return cnt;
+    return cnt_all;
 }
