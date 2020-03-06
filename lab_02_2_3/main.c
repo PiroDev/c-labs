@@ -16,8 +16,11 @@ int main()
     if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
     {
         n -= deletion(n, a);
-        arr_output(n, a);
-        return 0;
+        if (n != 0)
+        {
+            arr_output(n, a);
+            return 0;
+        }
     }
     printf("Incorrect input!");
     return 1;
