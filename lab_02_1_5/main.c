@@ -53,7 +53,7 @@ int min_cnt_pos_neg(int *a, int *end)
         {
             cnt_pos++;
         }
-        else if (*i <0)
+        else if (*i < 0)
         {
             cnt_neg++;
         }
@@ -79,7 +79,7 @@ int arr_sum_process(int *a, int *end, int k)
     int i = 0;
     int *left = a;
     int *right = end;
-    while(i < k)
+    while (i < k)
     {
         while (*left >= 0)
         {
