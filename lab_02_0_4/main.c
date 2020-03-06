@@ -48,18 +48,12 @@ void bubble_sort(int n, int a[])
 {
     for (int i = 0; i < n - 1; i++)
     {
-        int flag = 1;
         for (int j = i + 1; j < n; j++)
         {
             if (a[j] <= a[i])
             {
                 swap(&a[j], &a[i]);
-                flag = 0;
             }
-        }
-        if (flag)
-        {
-            break;
         }
     }
 }
