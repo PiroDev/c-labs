@@ -51,7 +51,7 @@ void bubble_sort(int n, int a[])
         int flag = 1;
         for (int j = i + 1; j < n; j++)
         {
-            if (a[j] < a[i])
+            if (a[j] <= a[i])
             {
                 swap(&a[j], &a[i]);
                 flag = 0;
