@@ -2,5 +2,8 @@
 *.o
 *.pro
 *.pro.user
+*.gcno
+*.gcda
+*.gcov
 **/__debug__/**
 **/__release__/**
