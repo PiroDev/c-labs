@@ -47,7 +47,7 @@ int arr_sum_process(int *a, int *end, int *sum)
 {
     int *left = a;
     int *right = end - 1;
-    while ((left < end) && (right >= a))
+    while ((left < end) && (right > a))
     {
         while ((left < end) && (*left >= 0))
         {
@@ -57,7 +57,7 @@ int arr_sum_process(int *a, int *end, int *sum)
         {
             right--;
         }
-        if ((left < end) && (right >= a))
+        if ((left < end) && (right > a))
         {
             *sum += (*left) * (*right);
         }
