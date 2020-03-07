@@ -33,13 +33,11 @@ int arr_input(int *a, int **end)
         {
             if (scanf("%d", i) != 1)
             {
-                printf("Input error!");
                 return 0;
             }
         }
         return 1;
     }
-    printf("Input error!");
     return 0;
 }
 
