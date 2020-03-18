@@ -42,7 +42,7 @@ int main()
 
 status_code arr_input(int n, int a[])
 {
-    int res = ok;
+    status_code res = ok;
     for (int i = 0; i < n; i++)
     {
         if (scanf("%d", &a[i]) != 1)
@@ -56,7 +56,7 @@ status_code arr_input(int n, int a[])
 
 status_code odd_mltpl(int n, int a[], int *mltpl)
 {
-    int res = ok;
+    status_code res = ok;
     *mltpl = 1;
     int is_odd = 0;
     for (int i = 0; i < n; i++)
