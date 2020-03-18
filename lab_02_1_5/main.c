@@ -2,28 +2,40 @@
 
 #define MAX_LEN 10
 
-int arr_input(int*, int**);
-int min_cnt_pos_neg(int*, int*);
-int arr_sum_process(int*, int*, int*);
+typedef enum
+{
+    ok = 0,
+    input_error = 1,
+    items_error = 2
+} status_code;
+
+status_code arr_input(int*, int**);
+status_code arr_sum_process(int*, int*, int*);
 
 int main()
 {
+    status_code res = ok;
     int a[MAX_LEN];
     int *end;
-    if (arr_input(a, &end))
+    if (arr_input(a, &end) == ok)
     {
         int sum = 0;
-        if (arr_sum_process(a, end, &sum))
+        res = arr_sum_process(a, end, &sum);
+        if (res == ok)
         {
             printf("%d", sum);
-            return 0;
+            return res;
         }
     }
-    printf("Input error!");
-    return 1;
+    else
+    {
+        res = input_error;
+    }
+    printf("Error!");
+    return res;
 }
 
-int arr_input(int *a, int **end)
+status_code arr_input(int *a, int **end)
 {
     int len;
     if ((scanf("%d", &len) == 1) && (len > 0) && (len <= 10))
@@ -33,15 +45,15 @@ int arr_input(int *a, int **end)
         {
             if (scanf("%d", i) != 1)
             {
-                return 0;
+                return input_error;
             }
         }
-        return 1;
+        return ok;
     }
-    return 0;
+    return input_error;
 }
 
-int arr_sum_process(int *a, int *end, int *sum)
+status_code arr_sum_process(int *a, int *end, int *sum)
 {
     int *left = a;
     int *right = end - 1;
@@ -64,10 +76,10 @@ int arr_sum_process(int *a, int *end, int *sum)
     }
     if (*sum == 0)
     {
-        return 0;
+        return items_error;
     }
     else
     {
-        return 1;
+        return ok;
     }
 }
