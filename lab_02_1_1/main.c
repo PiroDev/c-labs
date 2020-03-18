@@ -2,56 +2,69 @@
 
 #define MAX_LEN 10
 
-int arr_input(int, int[]);
-int odd_mltpl(int, int[]);
+typedef enum {ok, input_error, items_error} status_code;
+
+status_code arr_input(int, int[]);
+status_code odd_mltpl(int, int[], int*);
 
 int main()
 {
     int n;
-    int res = scanf("%d", &n);
     int a[MAX_LEN];
-    if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
+    int mltpl;
+    mltpl = 0;
+    status_code res = ok;
+    if (scanf("%d", &n) != 1)
+        res = input_error;
+    if ((n > 10) || (n < 1))
+        res = input_error;
+    if ((res == ok) && (arr_input(n, a) == ok))
     {
-        res = odd_mltpl(n, a);
-        if (res)
+        res = odd_mltpl(n, a, &mltpl);
+        if (res == ok)
         {
-            printf("%d", res);
-            return 0;
+            printf("%d", mltpl);
+            return res;
         }
     }
-    printf("Input error!");
-    return 1;
+    else
+    {
+        res = input_error;
+    }
+    printf("Error!");
+    return res;
 }
 
-int arr_input(int n, int a[])
+status_code arr_input(int n, int a[])
 {
-    int res = 0;
+    int res = ok;
     for (int i = 0; i < n; i++)
     {
-        res = scanf("%d", &a[i]);
-        if (res != 1)
+        if (scanf("%d", &a[i]) != 1)
         {
-            return 0;
+            res = input_error;
+            break;
         }
     }
-    return 1;
+    return res;
 }
 
-int odd_mltpl(int n, int a[])
+status_code odd_mltpl(int n, int a[], int *mltpl)
 {
-    int res = 1;
+    int res = ok;
+    *mltpl = 1;
     int is_odd = 0;
     for (int i = 0; i < n; i++)
     {
         if (a[i] % 2 != 0)
         {
-            res *= a[i];
+            (*mltpl) *= a[i];
             is_odd = 1;
         }
     }
-    if (is_odd)
+    if (is_odd == 0)
     {
-        return res;
+        res = items_error;
     }
-    return 0;
+    return res;
 }
