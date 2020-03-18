@@ -19,7 +19,7 @@ int main()
     status_code res = ok;
     if (scanf("%d", &n) != 1)
         res = input_error;
-    if ((res == ok) && (n > 10) || (n < 1))
+    if ((res == ok) && ((n > 10) || (n < 1)))
         res = input_error;
     if ((res == ok) && (arr_input(n, a) == ok))
     {
