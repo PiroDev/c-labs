@@ -2,7 +2,12 @@
 
 #define MAX_LEN 10
 
-typedef enum {ok, input_error, items_error} status_code;
+typedef enum 
+{
+    ok = 0,
+    input_error = 1,
+    items_error = 2
+} status_code;
 
 status_code arr_input(int, int[]);
 status_code odd_mltpl(int, int[], int*);
