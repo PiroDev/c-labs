@@ -16,8 +16,6 @@ int main()
 {
     int n;
     int a[MAX_LEN];
-    int mltpl;
-    mltpl = 0;
     status_code res = ok;
     if (scanf("%d", &n) != 1)
         res = input_error;
@@ -25,6 +23,8 @@ int main()
         res = input_error;
     if ((res == ok) && (arr_input(n, a) == ok))
     {
+        int mltpl;
+        mltpl = 0;
         res = odd_mltpl(n, a, &mltpl);
         if (res == ok)
         {
