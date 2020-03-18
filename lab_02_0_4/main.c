@@ -2,41 +2,52 @@
 
 #define MAX_LEN 10
 
-int arr_input(int, int[]);
-void arr_output(int, int[]);
+typedef enum
+{
+    ok = 0,
+    input_error = 1
+} status_code;
+
+status_code arr_input(int, int[]);
+void arr_output(int, const int[]);
 void bubble_sort(int, int[]);
 void swap(int*, int*);
 
 int main()
 {
     int n;
-    int res = scanf("%d", &n);
     int a[MAX_LEN];
-    if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
+    status_code res = ok;
+    if (scanf("%d", &n) != 1)
+        res = input_error;
+    if ((res == ok) && ((n > 10) || (n < 1)))
+        res = input_error;
+    if ((res == ok) && (arr_input(n, a) == ok))
     {
         bubble_sort(n, a);
         arr_output(n, a);
         return 0;
     }
-    printf("Incorrect input!");
-    return 1;
+    printf("Error!");
+    return res;
 }
 
-int arr_input(int n, int a[])
+status_code arr_input(int n, int a[])
 {
-    int res = 0;
+    status_code res = 0;
     for (int i = 0; i < n; i++)
     {
         res = scanf("%d", &a[i]);
         if (res != 1)
         {
-            return 0;
+            res = input_error;
+            break;
         }
     }
-    return 1;
+    return res;
 }
 
-void arr_output(int n, int a[])
+void arr_output(int n, const int a[])
 {
     for (int i = 0; i < n; i++)
     {

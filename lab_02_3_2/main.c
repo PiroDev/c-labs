@@ -53,6 +53,7 @@ status_code arr_input(int n, int a[])
         if (scanf("%d", &a[i]) != 1)
         {
             res = input_error;
+            break;
         }
     }
     return res;
