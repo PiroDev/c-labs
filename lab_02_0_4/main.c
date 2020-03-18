@@ -26,7 +26,11 @@ int main()
     {
         bubble_sort(n, a);
         arr_output(n, a);
-        return 0;
+        return res;
+    }
+    else
+    {
+        res = input_error;
     }
     printf("Error!");
     return res;
@@ -34,11 +38,10 @@ int main()
 
 status_code arr_input(int n, int a[])
 {
-    status_code res = 0;
+    status_code res = ok;
     for (int i = 0; i < n; i++)
     {
-        res = scanf("%d", &a[i]);
-        if (res != 1)
+        if (scanf("%d", &a[i]) != 1)
         {
             res = input_error;
             break;
