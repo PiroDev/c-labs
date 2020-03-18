@@ -3,47 +3,62 @@
 
 #define MAX_LEN 10
 
-int arr_input(int, int[]);
-void arr_output(int, int[]);
+typedef enum
+{
+    ok = 0,
+    input_error = 1,
+    items_error = 2
+} status_code;
+
+status_code arr_input(int, int[]);
+void arr_output(int, const int[]);
 int is_armstr(int);
-int cnt_armstr(int, int[], int[]);
+int cnt_armstr(int, const int[], int[]);
 int cnt_digits(int);
 
 
 int main()
 {
     int n;
-    int res = scanf("%d", &n);
     int a[MAX_LEN];
-    if ((res) && (n <= 10) && (n >= 1) && (arr_input(n, a)))
+    status_code res = ok;
+    if (scanf("%d", &n) != 1)
+        res = input_error;
+    if ((res == ok) && ((n > 10) || (n < 1)))
+        res = input_error;
+    if ((res == ok) && (arr_input(n, a) == ok))
     {
         int armstr[MAX_LEN];
         int cnt = cnt_armstr(n, a, armstr);
-        if (cnt)
+        if (cnt != 0)
         {
             arr_output(cnt, armstr);
-            return 0;
+            return res;
         }
+        res = items_error;
     }
-    printf("Incorrect input!");
-    return 1;
+    else
+    {
+        res = input_error;
+    }
+    printf("Error!");
+    return res;
 }
 
-int arr_input(int n, int a[])
+status_code arr_input(int n, int a[])
 {
-    int res = 0;
+    status_code res = ok;
     for (int i = 0; i < n; i++)
     {
-        res = scanf("%d", &a[i]);
-        if (res != 1)
+        if (scanf("%d", &a[i]) != 1)
         {
-            return 0;
+            res = input_error;
         }
     }
-    return 1;
+    return res;
 }
 
-void arr_output(int n, int a[])
+void arr_output(int n, const int a[])
 {
     for (int i = 0; i < n; i++)
     {
@@ -72,7 +87,7 @@ int is_armstr(int a)
     return 0;
 }
 
-int cnt_armstr(int n, int a[], int new[])
+int cnt_armstr(int n, const int a[], int new[])
 {
     int j = 0;
     for (int i = 0; i < n; i++)
