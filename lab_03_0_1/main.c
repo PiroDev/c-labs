@@ -28,7 +28,10 @@ int main()
         array_output(n, array);
         return res;
     }
-    res = input_error;
+    else
+    {
+        res = input_error;
+    }
     printf("Error!");
     return res;
 }
@@ -59,7 +62,7 @@ void matrix_process(int m, int n, int a[MAX_LEN][MAX_LEN], int array[])
         {
             i++;
         }
-        if (i == m)
+        if ((i == m) && (i != 0)))
             array[j] = 1;
         else
             array[j] = 0;
