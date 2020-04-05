@@ -55,7 +55,7 @@ void matrix_process(int m, int n, int a[MAX_LEN][MAX_LEN], int array[])
     for (int j = 0; j < n; j++)
     {
         int i = 1;
-        while ((i < m) && (a[i][j] <= a[i - 1][j]))
+        while ((i < m) && (a[i][j] < a[i - 1][j]))
         {
             i++;
         }
