@@ -77,7 +77,7 @@ status_code matrix_process(int m, int n, int a[MAX_LEN][MAX_LEN])
     for (int times = 0; times < 3; times++)
     {
         int buf = array[0][0];
-        for(int i = 0; i < ind - 1; i++)
+        for (int i = 0; i < ind - 1; i++)
         {
             array[0][i] = array[0][i + 1];
         }
@@ -85,8 +85,8 @@ status_code matrix_process(int m, int n, int a[MAX_LEN][MAX_LEN])
     }
     for (int i = 0; i < ind; i++)
     {
-        int pos_i = array[1][i] / m;
-        int pos_j = array[1][i] % m;
+        int pos_i = array[1][i] / n;
+        int pos_j = array[1][i] % n;
         a[pos_i][pos_j] = array[0][i];
     }
     return ok;
