@@ -76,14 +76,3 @@ status_code matrix_process(int m, int a[MAX_LEN][MAX_LEN], int *min)
         res = items_error;
     return res;
 }
-
-void matrix_mult(int m, int n, int a[MAX_LEN][MAX_LEN], int param[])
-{
-    for (int i = 0; i < m; i++)
-    {
-        int mult = 1;
-        for (int j = 0; j < n; j++)
-            mult *= a[i][j];
-        param[i] = mult;
-    }
-}
