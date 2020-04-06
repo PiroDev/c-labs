@@ -61,10 +61,8 @@ status_code matrix_input(int m, int n, int a[MAX_LEN][MAX_LEN])
 int digits_sum(int a)
 {
     int sum = 0;
-    while (a > 0)
+    while (a * a > 0)
     {
-        if ((a < 0) && (a > -10))
-            a *= -1;
         sum += a % 10;
         a /= 10;
     }
