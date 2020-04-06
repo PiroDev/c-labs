@@ -56,22 +56,22 @@ status_code matrix_input(int m, int n, int a[MAX_LEN][MAX_LEN])
     return res;
 }
 
-status_code matrix_process(int m, int a[MAX_LEN][MAX_LEN], int* min)
+status_code matrix_process(int m, int a[MAX_LEN][MAX_LEN], int *min)
 {
     status_code res = ok;
     *min = 0;
     for (int i = 0; i < m; i++)
         for (int j = 0; j < m; j++)
             if ((i > j) && (a[i][j] % 2 != 0))
+            {
+                if (*min != 0)
                 {
-                    if (*min != 0)
-                    {
-                        if (a[i][j] < *min)
-                            *min = a[i][j];
-                    }
-                    else
+                    if (a[i][j] < *min)
                         *min = a[i][j];
                 }
+                else
+                    *min = a[i][j];
+            }
     if (*min == 0)
         res = items_error;
     return res;
