@@ -28,7 +28,10 @@ int main()
     {
         matrix_process(&m, &n, a);
         if ((m == 0) || (n == 0))
+        {
             res = items_error;
+            printf("Error!");
+        }
         else
             matrix_output(m, n, a);
         return res;
