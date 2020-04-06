@@ -5,7 +5,8 @@
 typedef enum 
 {
     ok = 0,
-    input_error = 1
+    input_error = 1,
+    items_error = 2
 } status_code;
 
 status_code matrix_input(int, int, int[MAX_LEN][MAX_LEN]);
@@ -26,7 +27,10 @@ int main()
     if ((res == ok) && (matrix_input(m, n, a) == ok))
     {
         matrix_process(&m, &n, a);
-        matrix_output(m, n, a);
+        if ((m == 0) || (n == 0))
+            res = items_error;
+        else
+            matrix_output(m, n, a);
         return res;
     }
     else
