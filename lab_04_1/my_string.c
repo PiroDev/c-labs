@@ -14,5 +14,7 @@ char *my_strrchr(const char *str, int symbol)
     }
     if (str[index] == symbol)
         result = (char*)(str + index);
+    if (symbol == '\0')
+        result = (char*)(str + i);
     return result;
 }
