@@ -12,7 +12,7 @@ int main()
 
 void test_strrchr(void)
 {
-    int count_tests = 3;
+    int count_tests = 4;
     int successful_tests = 0;
     const char *str = "qwerty";
     int symbol = 'e';
@@ -22,8 +22,12 @@ void test_strrchr(void)
     symbol = 'a';
     if (strrchr(str, symbol) == my_strrchr(str, symbol))
         successful_tests++;
+    str = "rhjk";
+    symbol = 'f';
+    if (strrchr(str, symbol) == my_strrchr(str, symbol))
+        successful_tests++;
     str = "abc";
-    symbol = 'r';
+    symbol = '\0';
     if (strrchr(str, symbol) == my_strrchr(str, symbol))
         successful_tests++;
     printf("Tests success: %d/%d", successful_tests, count_tests);
