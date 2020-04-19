@@ -1,0 +1,1 @@
+char* my_strrchr(const char *str, int symbol);
