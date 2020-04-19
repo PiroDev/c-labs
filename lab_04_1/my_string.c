@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include "my_string.h"
 
-char* my_strrchr(const char *str, int symbol)
+char *my_strrchr(const char *str, int symbol)
 {
     char* result = NULL;
     int index = 0;
