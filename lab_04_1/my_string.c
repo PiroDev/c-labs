@@ -3,7 +3,7 @@
 
 char *my_strrchr(const char *str, int symbol)
 {
-    char* result = NULL;
+    char *result = NULL;
     int index = 0;
     int i = 0;
     while (str[i] != '\0')
