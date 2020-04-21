@@ -7,6 +7,7 @@ status_code str_input(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int *wo
     int len = 0;
     char *sep = " ,.;:-!?";
     char ch = 0;
+    char ch_prev = 0;
     int word_index = 0;
     int symbol_index = 0;
     while (((ch = getchar()) != '\n') && (ch != EOF))
@@ -30,11 +31,14 @@ status_code str_input(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int *wo
             }
         }
         len++;
+        ch_prev = ch;
         if (len >= STR_MAX_LEN)
             return len_error;
     }
     if (word_index + symbol_index == 0)
         return items_error;
+    if (in(sep, ch_prev) == true)
+        word_index--;
     *words_count = word_index + 1;
     return ok;
 }

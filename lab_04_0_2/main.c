@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "my_string.h"
 
-int unique_words(char[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int[], int);
+void unique_words(char[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int[], int);
 
 int main()
 {
@@ -12,20 +12,18 @@ int main()
     if (result == ok)
     {
         int repeats[STR_MAX_LEN / 2 - 1] = { 0 };
-        int unique_words_count = unique_words(words, repeats, words_count);
-        printf("Result:");
-        for (int i = 0; i < unique_words_count; i++)
-            if (repeats[i] != 0)
-                printf("%s %d\n", words[i], repeats[i]);
+        unique_words(words, repeats, words_count);
+        printf("Result:\n");
+        for (int i = 0; i < words_count; i++)
+            printf("%s %d\n", words[i], repeats[i]);
         return result;
     }
     printf("Error!");
     return result;
 }
 
-int unique_words(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int repeats[], int words_count)
+void unique_words(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int repeats[], int words_count)
 {
-    int result = words_count;
     for (int i = 0; i < words_count; i++)
         repeats[i] = 1;
     for (int i = 0; i < words_count; i++)
@@ -34,9 +32,7 @@ int unique_words(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int repeats[
             if ((repeats[i] != 0) && (strcmp((const char *) words[i], (const char *) words[j]) == 0))
             {
                 repeats[i]++;
-                repeats[j] = 0;
-                result--;
+                repeats[j]++;
             }
         }
-    return result;
 }
