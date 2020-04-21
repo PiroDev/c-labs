@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "my_string.h"
 
 status_code str_input(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int *words_count)
@@ -58,20 +59,22 @@ bool in(char *str, char symbol)
 
 void exclude(char *str, char symbol, int start)
 {
+    int len = strlen(str);
     int i = start;
-    while (str[i] != '\0')
+    int j = i;
+    while (i < len)
     {
         if (str[i] == symbol)
         {
-            int j = i;
-            do
+            j = i;
+            while (j < len)
             {
                 str[j] = str[j + 1];
                 j++;
             }
-            while (str[j - 1] != '\0');
+            len--;
+            i--;
         }
-        if (str[i] != '\0')
-            i++;
+        i++;
     }
 }

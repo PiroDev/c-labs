@@ -18,6 +18,8 @@ int main()
         else
             printf("Result: %s\n", new_str);
     }
+    else
+        printf("Error!");
     return result;
 }
 
