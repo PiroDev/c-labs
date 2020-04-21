@@ -29,11 +29,9 @@ void unique_words(char words[STR_MAX_LEN / 2 - 1][WORD_MAX_LEN + 1], int repeats
         repeats[i] = 1;
     for (int i = 0; i < words_count; i++)
         for (int j = i + 1; j < words_count; j++)
-        {
-        if ((repeats[i] != 0) && (strcmp((const char *) words[i], (const char *) words[j]) == 0))
+            if ((repeats[i] != 0) && (strcmp((const char *) words[i], (const char *) words[j]) == 0))
             {
                 repeats[i]++;
                 repeats[j] = 0;
             }
-        }
 }
