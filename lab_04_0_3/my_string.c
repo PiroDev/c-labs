@@ -62,15 +62,15 @@ void exclude(char *str, char symbol, int start)
     while (str[i] != '\0')
     {
         if (str[i] == symbol)
+        {
+            int j = i;
+            do
             {
-                int j = i;
-                do
-                {
-                    str[j] = str[j + 1];
-                    j++;
-                }
-                while (str[j - 1] != '\0');
+                str[j] = str[j + 1];
+                j++;
             }
+            while (str[j - 1] != '\0');
+        }
         if (str[i] != '\0')
             i++;
     }
