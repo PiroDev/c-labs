@@ -7,9 +7,8 @@ status_code process(FILE *f, int *count)
     int n = 0;
     int a1 = 0;
     int a2 = 0;
-    int a3 = 0;
-    int scan_res = 1;
-    while ((scan_res = fscanf(f, "%d", &a1)) == 1)
+    int a3 = 0; 
+    while (fscanf(f, "%d", &a1) == 1)
     {
         n++;
         if (n >= 3)
@@ -20,7 +19,7 @@ status_code process(FILE *f, int *count)
         a3 = a2;
         a2 = a1;
     }
-    if ((n == 0) || (scan_res != EOF))
+    if (n < 2)
         result = input_error;
     return result;
 }
