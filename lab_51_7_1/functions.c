@@ -19,7 +19,7 @@ status_code process(FILE *f, int *count)
         a3 = a2;
         a2 = a1;
     }
-    if (n < 2)
+    if (n < 3)
         result = input_error;
     return result;
 }
