@@ -89,13 +89,17 @@ status_code sort_file(char *file_name)
         for (int i = 0; i < n - 1; i++)
             for (int j = i + 1; j < n; j++)
             {
-                num_i = get_number_by_pos(i, f);
-                num_j = get_number_by_pos(j, f);
+                num_i = get_number_by_pos(i, f, &result);
+                num_j = get_number_by_pos(j, f, &result);
+                if (result != ok)
+                    return result;
                 if (num_i >= num_j)
                 {
                     temp = num_i;
-                    put_number_by_pos(num_j, i, f);
-                    put_number_by_pos(temp, j, f);
+                    put_number_by_pos(num_j, i, f, &result);
+                    put_number_by_pos(temp, j, f, &result);
+                    if (result != ok)
+                        return result;
                 }
             }
         fclose(f);
@@ -105,16 +109,20 @@ status_code sort_file(char *file_name)
     return result;
 }
 
-int get_number_by_pos(int pos, FILE *f)
+int get_number_by_pos(int pos, FILE *f, status_code *result)
 {
     int num;
-    fseek(f, (long int) pos * sizeof(int), SEEK_SET);
-    fread(&num, sizeof(int), 1, f);
+    if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
+        *result = file_error;
+    if (fread(&num, sizeof(int), 1, f) != 1)
+        *result = file_error;
     return num;
 }
 
-void put_number_by_pos(int number, int pos, FILE *f)
+void put_number_by_pos(int number, int pos, FILE *f, status_code *result)
 {
-    fseek(f, (long int) pos * sizeof(int), SEEK_SET);
-    fwrite(&number, sizeof(int), 1, f);
+    if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
+        *result = file_error;
+    if (fwrite(&number, sizeof(int), 1, f) != 1)
+        *result = file_error;
 }
