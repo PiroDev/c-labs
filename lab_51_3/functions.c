@@ -6,11 +6,11 @@
 #define MIN_RAND -100
 #define MAX_RAND 100
 
-int process(int argc, char **argv)
+status_code process(int argc, char **argv)
 {
-    int result = OK;
+    status_code result = ok;
     if (argc < 3)
-        result = ARGS_ERROR;
+        result = args_error;
     else
     {
         if ((strcmp((const char *) argv[1], "c") == 0) && (argc == 4))
@@ -19,7 +19,7 @@ int process(int argc, char **argv)
             if (((n = atoi(argv[2])) != 0) && (n > 0))
                 result = create_random_file(n, argv[3]);
             else
-                result = ARGS_ERROR;
+                result = args_error;
         }
         else if ((strcmp((const char *) argv[1], "p") == 0) && (argc == 3))
         {
@@ -31,15 +31,15 @@ int process(int argc, char **argv)
         }
         else
         {
-            result = ARGS_ERROR;
+            result = args_error;
         }
     }
     return result;
 }
 
-int create_random_file(int n, char *file_name)
+status_code create_random_file(int n, char *file_name)
 {
-    int result = OK;
+    status_code result = ok;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "wb");
     if (f != NULL)
@@ -51,20 +51,20 @@ int create_random_file(int n, char *file_name)
             num = MIN_RAND + rand() % ((MAX_RAND + 1) - MIN_RAND);
             if (fwrite(&num, sizeof(int), 1, f) != 1)
             {
-                result = FILE_ERROR;
+                result = file_error;
                 break;
             }
         }
         fclose(f);
     }
     else
-        result = ARGS_ERROR;
+        result = args_error;
     return result;
 }
 
-int print_file(char *file_name)
+status_code print_file(char *file_name)
 {
-    int result = OK;
+    status_code result = ok;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "rb");
     if (f != NULL)
@@ -73,17 +73,17 @@ int print_file(char *file_name)
         while (fread(&num, sizeof(int), 1, f) == 1)
             printf("%d ", num);
         if (!feof(f))
-            result = FILE_ERROR;
+            result = file_error;
         fclose(f);
     }
     else
-        result = ARGS_ERROR;
+        result = args_error;
     return result;
 }
 
-int sort_file(char *file_name)
+status_code sort_file(char *file_name)
 {
-    int result = OK;
+    status_code result = ok;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "r+b");
     if (f != NULL)
@@ -97,7 +97,7 @@ int sort_file(char *file_name)
             {
                 num_i = get_number_by_pos(i, f, &result);
                 num_j = get_number_by_pos(j, f, &result);
-                if (result != OK)
+                if (result != ok)
                 {
                     fclose(f);
                     return result;
@@ -107,7 +107,7 @@ int sort_file(char *file_name)
                     temp = num_i;
                     put_number_by_pos(num_j, i, f, &result);
                     put_number_by_pos(temp, j, f, &result);
-                    if (result != OK)
+                    if (result != ok)
                     {
                         fclose(f);
                         return result;
@@ -117,24 +117,24 @@ int sort_file(char *file_name)
         fclose(f);
     }
     else
-        result = ARGS_ERROR;
+        result = args_error;
     return result;
 }
 
-int get_number_by_pos(int pos, FILE *f, int *result)
+int get_number_by_pos(int pos, FILE *f, status_code *result)
 {
     int num;
     if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
-        *result = FILE_ERROR;
+        *result = file_error;
     if (fread(&num, sizeof(int), 1, f) != 1)
-        *result = FILE_ERROR;
+        *result = file_error;
     return num;
 }
 
-void put_number_by_pos(int number, int pos, FILE *f, int *result)
+void put_number_by_pos(int number, int pos, FILE *f, status_code *result)
 {
     if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
-        *result = FILE_ERROR;
+        *result = file_error;
     if (fwrite(&number, sizeof(int), 1, f) != 1)
-        *result = FILE_ERROR;
+        *result = file_error;
 }

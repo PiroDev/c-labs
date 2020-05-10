@@ -8,9 +8,9 @@ Sort type: increasing sort;
 
 int main(int argc, char **argv)
 {
-    int result = OK;
+    status_code result = ok;
     result = process(argc, argv);
-    if (result != OK)
+    if (result != ok)
         printf("Error!");
     return result;
 }
