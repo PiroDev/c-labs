@@ -49,7 +49,11 @@ status_code create_random_file(int n, char *file_name)
         for (int i = 0; i < n; i++)
         {
             num = MIN_RAND + rand() % ((MAX_RAND + 1) - MIN_RAND);
-            fwrite(&num, sizeof(int), 1, f);
+            if (fwrite(&num, sizeof(int), 1, f) != 1)
+            {
+                result = file_error;
+                break;
+            }
         }
         fclose(f);
     }
@@ -68,6 +72,8 @@ status_code print_file(char *file_name)
         int num;
         while (fread(&num, sizeof(int), 1, f) == 1)
             printf("%d ", num);
+        if (!feof(f))
+            result = file_error;
         fclose(f);
     }
     else
@@ -92,14 +98,20 @@ status_code sort_file(char *file_name)
                 num_i = get_number_by_pos(i, f, &result);
                 num_j = get_number_by_pos(j, f, &result);
                 if (result != ok)
+                {
+                    fclose(f);
                     return result;
+                }
                 if (num_i >= num_j)
                 {
                     temp = num_i;
                     put_number_by_pos(num_j, i, f, &result);
                     put_number_by_pos(temp, j, f, &result);
                     if (result != ok)
+                    {
+                        fclose(f);
                         return result;
+                    }
                 }
             }
         fclose(f);
