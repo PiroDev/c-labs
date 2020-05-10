@@ -1,1 +1,1 @@
-./main.exe f test
+./main.exe f test.bin

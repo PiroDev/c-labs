@@ -1,1 +1,1 @@
-./main.exe s test
+./main.exe s test.bin
