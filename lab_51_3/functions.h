@@ -1,15 +1,12 @@
 #include <stdio.h>
 
-typedef enum
-{
-    ok = 0,
-    args_error = -1,
-    file_error = -2
-} status_code;
+#define OK 0
+#define ARGS_ERROR -1
+#define FILE_ERROR -2
 
-status_code process(int, char **);
-status_code create_random_file(int, char *);
-status_code print_file(char *);
-status_code sort_file(char *);
-int get_number_by_pos(int, FILE *f, status_code *);
-void put_number_by_pos(int, int, FILE *f, status_code *);
+int process(int, char **);
+int create_random_file(int, char *);
+int print_file(char *);
+int sort_file(char *);
+int get_number_by_pos(int, FILE *f, int *);
+void put_number_by_pos(int, int, FILE *f, int *);

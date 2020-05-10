@@ -6,11 +6,11 @@
 #define MIN_RAND -100
 #define MAX_RAND 100
 
-status_code process(int argc, char **argv)
+int process(int argc, char **argv)
 {
-    status_code result = ok;
+    int result = OK;
     if (argc < 3)
-        result = args_error;
+        result = ARGS_ERROR;
     else
     {
         if ((strcmp((const char *) argv[1], "c") == 0) && (argc == 4))
@@ -19,7 +19,7 @@ status_code process(int argc, char **argv)
             if (((n = atoi(argv[2])) != 0) && (n > 0))
                 result = create_random_file(n, argv[3]);
             else
-                result = args_error;
+                result = ARGS_ERROR;
         }
         else if ((strcmp((const char *) argv[1], "p") == 0) && (argc == 3))
         {
@@ -31,15 +31,15 @@ status_code process(int argc, char **argv)
         }
         else
         {
-            result = args_error;
+            result = ARGS_ERROR;
         }
     }
     return result;
 }
 
-status_code create_random_file(int n, char *file_name)
+int create_random_file(int n, char *file_name)
 {
-    status_code result = ok;
+    int result = OK;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "wb");
     if (f != NULL)
@@ -51,20 +51,20 @@ status_code create_random_file(int n, char *file_name)
             num = MIN_RAND + rand() % ((MAX_RAND + 1) - MIN_RAND);
             if (fwrite(&num, sizeof(int), 1, f) != 1)
             {
-                result = file_error;
+                result = FILE_ERROR;
                 break;
             }
         }
         fclose(f);
     }
     else
-        result = args_error;
+        result = ARGS_ERROR;
     return result;
 }
 
-status_code print_file(char *file_name)
+int print_file(char *file_name)
 {
-    status_code result = ok;
+    int result = OK;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "rb");
     if (f != NULL)
@@ -73,17 +73,17 @@ status_code print_file(char *file_name)
         while (fread(&num, sizeof(int), 1, f) == 1)
             printf("%d ", num);
         if (!feof(f))
-            result = file_error;
+            result = FILE_ERROR;
         fclose(f);
     }
     else
-        result = args_error;
+        result = ARGS_ERROR;
     return result;
 }
 
-status_code sort_file(char *file_name)
+int sort_file(char *file_name)
 {
-    status_code result = ok;
+    int result = OK;
     FILE *f = NULL;
     f = fopen((const char *) file_name, "r+b");
     if (f != NULL)
@@ -97,7 +97,7 @@ status_code sort_file(char *file_name)
             {
                 num_i = get_number_by_pos(i, f, &result);
                 num_j = get_number_by_pos(j, f, &result);
-                if (result != ok)
+                if (result != OK)
                 {
                     fclose(f);
                     return result;
@@ -107,7 +107,7 @@ status_code sort_file(char *file_name)
                     temp = num_i;
                     put_number_by_pos(num_j, i, f, &result);
                     put_number_by_pos(temp, j, f, &result);
-                    if (result != ok)
+                    if (result != OK)
                     {
                         fclose(f);
                         return result;
@@ -117,24 +117,24 @@ status_code sort_file(char *file_name)
         fclose(f);
     }
     else
-        result = args_error;
+        result = ARGS_ERROR;
     return result;
 }
 
-int get_number_by_pos(int pos, FILE *f, status_code *result)
+int get_number_by_pos(int pos, FILE *f, int *result)
 {
     int num;
     if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
-        *result = file_error;
+        *result = FILE_ERROR;
     if (fread(&num, sizeof(int), 1, f) != 1)
-        *result = file_error;
+        *result = FILE_ERROR;
     return num;
 }
 
-void put_number_by_pos(int number, int pos, FILE *f, status_code *result)
+void put_number_by_pos(int number, int pos, FILE *f, int *result)
 {
     if (fseek(f, (long int) pos * sizeof(int), SEEK_SET) != 0)
-        *result = file_error;
+        *result = FILE_ERROR;
     if (fwrite(&number, sizeof(int), 1, f) != 1)
-        *result = file_error;
+        *result = FILE_ERROR;
 }
