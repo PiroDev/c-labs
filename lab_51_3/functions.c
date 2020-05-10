@@ -69,11 +69,17 @@ status_code print_file(char *file_name)
     f = fopen((const char *) file_name, "rb");
     if (f != NULL)
     {
+        int n = 0;
         int num;
         while (fread(&num, sizeof(int), 1, f) == 1)
+        {
             printf("%d ", num);
+            n++;
+        }
         if (!feof(f))
             result = file_error;
+        else if (n == 0)
+            result = input_error;
         fclose(f);
     }
     else
@@ -90,30 +96,35 @@ status_code sort_file(char *file_name)
     {
         fseek(f, 0, SEEK_END);
         int n = ftell(f) / sizeof(int);
-        fseek(f, 0, SEEK_SET);
-        int num_i, num_j, temp;
-        for (int i = 0; i < n - 1; i++)
-            for (int j = i + 1; j < n; j++)
-            {
-                num_i = get_number_by_pos(i, f, &result);
-                num_j = get_number_by_pos(j, f, &result);
-                if (result != ok)
+        if (n != 0)
+        {
+            fseek(f, 0, SEEK_SET);
+            int num_i, num_j, temp;
+            for (int i = 0; i < n - 1; i++)
+                for (int j = i + 1; j < n; j++)
                 {
-                    fclose(f);
-                    return result;
-                }
-                if (num_i >= num_j)
-                {
-                    temp = num_i;
-                    put_number_by_pos(num_j, i, f, &result);
-                    put_number_by_pos(temp, j, f, &result);
+                    num_i = get_number_by_pos(i, f, &result);
+                    num_j = get_number_by_pos(j, f, &result);
                     if (result != ok)
                     {
                         fclose(f);
                         return result;
                     }
+                    if (num_i >= num_j)
+                    {
+                        temp = num_i;
+                        put_number_by_pos(num_j, i, f, &result);
+                        put_number_by_pos(temp, j, f, &result);
+                        if (result != ok)
+                        {
+                            fclose(f);
+                            return result;
+                        }
+                    }
                 }
-            }
+        }
+        else
+            result = input_error;
         fclose(f);
     }
     else
