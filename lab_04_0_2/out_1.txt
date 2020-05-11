@@ -1,0 +1,6 @@
+Result:
+abc 2
+bca 1
+nff 1
+qwerty 1
+abcabc 1
