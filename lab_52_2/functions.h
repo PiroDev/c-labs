@@ -5,9 +5,10 @@
 typedef enum
 {
     ok = 0,
-    args_error = 53,
-    file_error = 54,
-    input_error = 55
+    unknown_args_error = 53,
+    args_error = -1,
+    file_error = -2,
+    input_error = -3
 } status_code;
 
 typedef struct

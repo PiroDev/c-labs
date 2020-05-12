@@ -13,7 +13,7 @@ status_code process(int argc, char **argv)
     else if ((argc == 3) && (strcmp((const char *) argv[1], "at") == 0))
         result = add_in_text_file(argv[2]);
     else
-        result = args_error;
+        result = unknown_args_error;
     return result;
 }
 
