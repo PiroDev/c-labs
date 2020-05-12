@@ -40,7 +40,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = ok;
             for (int i = 0; i < n - 1; i++)
                 for (int j = i + 1; j < n; j++)
-                    if (products_compare(items[i], items[j]) <= 0)
+                    if (products_compare(items[j], items[i]) >= 0)
                     {
                         product buf = items[i];
                         items[i] = items[j];
