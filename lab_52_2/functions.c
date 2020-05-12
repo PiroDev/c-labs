@@ -55,7 +55,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = input_error;
     }
     else
-        result = unknown_args_error;
+        result = args_error;
     FILE *files[2] = { f_in, f_out };
     close_files(files, 2);
     return result;
@@ -136,7 +136,7 @@ status_code add_in_text_file(char *fname)
         fclose(f);
     }
     else
-        result = unknown_args_error;
+        result = args_error;
     return result;
 }
 
@@ -144,7 +144,7 @@ product read_item(FILE *f, status_code *result)
 {
     product item = { .price = 0 };
     *result = ok;
-    if (fscanf(f, "%s%s%d%d", item.name, item.company, &(item.price), &(item.count)) != 4)
+    if (fscanf(f, "%s%s%u%u", item.name, item.company, &(item.price), &(item.count)) != 4)
         *result = input_error;
     return item;
 }
@@ -152,7 +152,7 @@ product read_item(FILE *f, status_code *result)
 status_code write_item(FILE *f, product item)
 {
     status_code result = ok;
-    if (fprintf(f, "%s\n%s\n%d\n%d\n", item.name, item.company, item.price, item.count) != 4)
+    if (fprintf(f, "%s\n%s\n%u\n%u\n", item.name, item.company, item.price, item.count) != 4)
         result = file_error;
     return result;
 }
