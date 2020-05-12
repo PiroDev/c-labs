@@ -15,8 +15,8 @@ typedef struct
 {
     char name[MAX_NAME_LEN + 1];
     char company[MAX_COMPANY_NAME_LEN + 1];
-    int price;
-    int count;
+    unsigned int price;
+    unsigned int count;
 } product;
 
 status_code process(int, char **);

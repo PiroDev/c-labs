@@ -142,7 +142,7 @@ status_code add_in_text_file(char *fname)
 
 product read_item(FILE *f, status_code *result)
 {
-    product item = { .price = -1 };
+    product item = { .price = 0 };
     *result = ok;
     if (fscanf(f, "%s%s%d%d", item.name, item.company, &(item.price), &(item.count)) != 4)
         *result = input_error;
