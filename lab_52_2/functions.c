@@ -55,7 +55,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = input_error;
     }
     else
-        result = args_error;
+        result = unknown_args_error;
     FILE *files[2] = { f_in, f_out };
     close_files(files, 2);
     return result;
