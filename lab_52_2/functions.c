@@ -89,7 +89,7 @@ status_code find_in_text_file(char *fname, char *key)
         fclose(f);
     }
     else
-        result = args_error;
+        result = unknown_args_error;
     return result;
 }
 
