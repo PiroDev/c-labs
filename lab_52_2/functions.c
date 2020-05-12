@@ -55,7 +55,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = input_error;
     }
     else
-        result = args_error;
+        result = unknown_args_error;
     FILE *files[2] = { f_in, f_out };
     close_files(files, 2);
     return result;
@@ -75,9 +75,11 @@ status_code find_in_text_file(char *fname, char *key)
             item = read_item(f, &result);
             if (result == ok)
             {
-                n++;
                 if (ends_with(item.name, key) > 0)
+                {
+                    n++;
                     write_item(stdout, item);
+                }
             }
         }
         if ((n != 0) && feof(f))
@@ -89,7 +91,7 @@ status_code find_in_text_file(char *fname, char *key)
         fclose(f);
     }
     else
-        result = unknown_args_error;
+        result = args_error;
     return result;
 }
 
