@@ -1,0 +1,5 @@
+./main.exe at test_out.txt
+apple
+bmk
+44
+4
