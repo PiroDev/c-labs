@@ -36,19 +36,19 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             n++;
         }
         if ((n != 0) && (feof(f_in)))
-            {
-                result = ok;
-                for (int i = 0; i < n - 1; i++)
-                    for (int j = i + 1; j < n; j++)
-                        if (products_compare(items[i], items[j]) < 0)
-                        {
-                            product buf = items[i];
-                            items[i] = items[j];
-                            items[j] = buf;
-                        }
-                for (int i = 0; i < n; i++)
-                    write_item(f_out, items[i]);
-            }
+        {
+            result = ok;
+            for (int i = 0; i < n - 1; i++)
+                for (int j = i + 1; j < n; j++)
+                    if (products_compare(items[i], items[j]) < 0)
+                    {
+                        product buf = items[i];
+                        items[i] = items[j];
+                        items[j] = buf;
+                    }
+            for (int i = 0; i < n; i++)
+                write_item(f_out, items[i]);
+        }
         else if (n == 0)
             result = file_error;
         else
@@ -56,7 +56,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
     }
     else
         result = args_error;
-    FILE *files[2] = {f_in, f_out};
+    FILE *files[2] = { f_in, f_out };
     close_files(files, 2);
     return result;
 }
@@ -140,7 +140,7 @@ status_code add_in_text_file(char *fname)
 
 product read_item(FILE *f, status_code *result)
 {
-    product item = {.price = -1};
+    product item = { .price = -1 };
     *result = ok;
     if (fscanf(f, "%s%s%d%d", item.name, item.company, &(item.price), &(item.count)) != 4)
         *result = input_error;
