@@ -40,7 +40,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = ok;
             for (int i = 0; i < n - 1; i++)
                 for (int j = i + 1; j < n; j++)
-                    if (products_compare(items[i], items[j]) < 0)
+                    if (products_compare(items[i], items[j]) <= 0)
                     {
                         product buf = items[i];
                         items[i] = items[j];
@@ -55,7 +55,7 @@ status_code sort_text_file(char *fname_in, char *fname_out)
             result = input_error;
     }
     else
-        result = unknown_args_error;
+        result = args_error;
     FILE *files[2] = { f_in, f_out };
     close_files(files, 2);
     return result;
@@ -134,7 +134,7 @@ status_code add_in_text_file(char *fname)
         fclose(f);
     }
     else
-        result = args_error;
+        result = unknown_args_error;
     return result;
 }
 
