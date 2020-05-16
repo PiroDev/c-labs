@@ -38,13 +38,13 @@ status_code sort_text_file(char *fname_in, char *fname_out)
         if ((n != 0) && (feof(f_in)))
         {
             result = ok;
-            for (int i = 0; i < n - 1; i++)
-                for (int j = i + 1; j < n; j++)
-                    if (products_compare(items[i], items[j]) < 0)
+            for (int j = 0; j < n - 1; j++)
+                for (int i = 0; i < n - j - 1; i++)
+                    if (products_compare(items[i], items[i + 1]) < 0)
                     {
                         product buf = items[i];
-                        items[i] = items[j];
-                        items[j] = buf;
+                        items[i] = items[i + 1];
+                        items[i + 1] = buf;
                     }
             for (int i = 0; i < n; i++)
                 write_item(f_out, items[i]);
