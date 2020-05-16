@@ -112,7 +112,7 @@ status_code add_in_text_file(char *fname)
             while (flag)
             {
                 curr_item = read_item(f, &result);
-                if ((result == ok) && (products_compare(curr_item, item) > 0))
+                if ((result == ok) && (products_compare(curr_item, item) >= 0))
                     items[index++] = curr_item;
                 else
                     flag = 0;
