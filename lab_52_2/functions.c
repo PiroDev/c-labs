@@ -69,23 +69,17 @@ status_code find_in_text_file(char *fname, char *key)
     if (f != NULL)
     {
         product item;
-        int n = 0;
         while (result == ok)
         {
             item = read_item(f, &result);
             if (result == ok)
             {
                 if (ends_with(item.name, key) > 0)
-                {
-                    n++;
                     write_item(stdout, item);
-                }
             }
         }
-        if ((n != 0) && feof(f))
+        if (feof(f))
             result = ok;
-        else if (n == 0)
-            result = file_error;
         else
             result = input_error;
         fclose(f);
