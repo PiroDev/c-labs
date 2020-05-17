@@ -5,17 +5,14 @@ egg
 bmk
 32
 2
-
 book
 sds
 45
 2
-
 milk
 sds
 45
 3
-
 nuts
 company
 44

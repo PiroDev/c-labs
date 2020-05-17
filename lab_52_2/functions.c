@@ -144,8 +144,10 @@ product read_item(FILE *f, status_code *result)
 {
     product item = { .price = 0 };
     *result = ok;
-    if (fscanf(f, "%s%s%u%u", item.name, item.company, &(item.price), &(item.count)) != 4)
+    if ((read_str(f, item.name, MAX_NAME_LEN) != ok) || (read_str(f, item.company, MAX_COMPANY_NAME_LEN) != ok) || (fscanf(f, "%u%u", &(item.price), &(item.count)) != 2))
         *result = input_error;
+    else
+        fgetc(f);
     return item;
 }
 
@@ -195,4 +197,19 @@ void close_files(FILE **files, int count)
     for (int i = 0; i < count; i++)
         if (files[i] != NULL)
             fclose(files[i]);
+}
+
+status_code read_str(FILE *f, char *str, int max_count)
+{
+    status_code result = ok;
+    int count = 0;
+    char c = 0;
+    while ((count < max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
+    {
+        str[count] = c;
+        count++;
+    }
+    if ((c != '\n') && (c != EOF))
+        result = input_error;
+    return result;
 }
