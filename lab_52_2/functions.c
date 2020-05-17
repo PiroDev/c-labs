@@ -68,6 +68,7 @@ status_code find_in_text_file(char *fname, char *key)
     f = fopen((const char *) fname, "r");
     if (f != NULL)
     {
+        product items[MAX_STRUCTS_COUNT];
         product item;
         int n = 0;
         while (result == ok)
@@ -77,13 +78,17 @@ status_code find_in_text_file(char *fname, char *key)
             {
                 if (ends_with(item.name, key) > 0)
                 {
+                    items[n] = item;
                     n++;
-                    write_item(stdout, item);
                 }
             }
         }
         if ((n != 0) && feof(f))
+        {
             result = ok;
+            for (int i = 0; i < n; i++)
+                write_item(stdout, items[i]);
+        }
         else if (n == 0)
             result = file_error;
         else
