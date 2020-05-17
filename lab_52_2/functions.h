@@ -28,3 +28,4 @@ status_code write_item(FILE *, product);
 int products_compare(product, product);
 int ends_with(char *, char *);
 void close_files(FILE **, int);
+status_code read_str(FILE *, char *, int);
