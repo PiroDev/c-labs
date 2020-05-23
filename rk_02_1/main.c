@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define MAXLEN_TOWN_NAME 100
 #define MAX_STRUCTS_COUNT 1300
 #define TOWNS_MAX_COUNT 5
@@ -19,7 +20,7 @@ typedef struct
 
 status_code process(FILE *, FILE *);
 status_code input(FILE *, town *, int *);
-status_code read_item(FILE *, town);
+status_code read_item(FILE *, town *);
 void print(FILE *, town *);
 status_code read_str(FILE *, char *, int);
 
@@ -55,30 +56,29 @@ status_code process(FILE *f_in, FILE *f_out)
                     max_towns[1] = max_towns[0];
                     max_towns[0] = towns[i];
                 }
-                if (towns[i].population > max_towns[1].population)
+                else if (towns[i].population > max_towns[1].population)
                 {
                     max_towns[4] = max_towns[3];
                     max_towns[3] = max_towns[2];
                     max_towns[2] = max_towns[1];
                     max_towns[1] = towns[i];
                 }
-                if (towns[i].population > max_towns[2].population)
+                else if (towns[i].population > max_towns[2].population)
                 {
                     max_towns[4] = max_towns[3];
                     max_towns[3] = max_towns[2];
                     max_towns[2] = towns[i];
                 }
-                if (towns[i].population > max_towns[3].population)
+                else if (towns[i].population > max_towns[3].population)
                 {
                     max_towns[4] = max_towns[3];
                     max_towns[3] = towns[i];
                 }
-                if (towns[i].population > max_towns[4].population)
+                else if (towns[i].population > max_towns[4].population)
                 {
                     max_towns[4] = towns[i];
                 }
             }
-            print(stdout, towns);
             print(f_out, max_towns);
         }
     }
@@ -94,8 +94,14 @@ status_code input(FILE *f, town towns[], int *count)
     int i = 0;
     while (!(feof(f)) && (i < MAX_STRUCTS_COUNT))
     {
-        if ((result = read_item(f, item)) == ok)
+        if ((result = read_item(f, &item)) == ok)
+        {
             towns[i] = item;
+            for (int i = 0; i < MAXLEN_TOWN_NAME; i++)
+            {
+                item.name[i] = '\0';
+            }
+        }
         else
             break;
         i++;
@@ -106,10 +112,10 @@ status_code input(FILE *f, town towns[], int *count)
     return result;
 }
 
-status_code read_item(FILE *f, town item)
+status_code read_item(FILE *f, town *item)
 {
     status_code result = ok;
-    if ((read_str(f, item.name, MAXLEN_TOWN_NAME) != ok) || (fscanf(f, "%d%ld", &(item.foundation_date), &(item.population)) != 2))
+    if ((read_str(f, item->name, MAXLEN_TOWN_NAME) != ok) || (fscanf(f, "%d%ld", &(item->foundation_date), &(item->population)) != 2))
     {
         if (feof(f))
             result = input_error;
@@ -118,7 +124,7 @@ status_code read_item(FILE *f, town item)
     }
     else
         fgetc(f);
-    printf("%s\n", item.name);
+    return result;
 }
 
 status_code read_str(FILE *f, char *str, int max_count)
@@ -141,4 +147,3 @@ void print(FILE *f, town towns[])
     for (int i = 0; i < TOWNS_MAX_COUNT; i++)
         fprintf(f, "%s\n", towns[i].name);
 }
-
