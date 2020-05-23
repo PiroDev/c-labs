@@ -19,7 +19,7 @@ typedef struct
 
 status_code process(FILE *, FILE *);
 status_code input(FILE *, town *, int *);
-status_code read_item(FILE *, town *);
+status_code read_item(FILE *, town);
 void print(FILE *, town *);
 status_code read_str(FILE *, char *, int);
 
@@ -94,7 +94,7 @@ status_code input(FILE *f, town towns[], int *count)
     int i = 0;
     while (!(feof(f)) && (i < MAX_STRUCTS_COUNT))
     {
-        if ((result = read_item(f, &item)) == ok)
+        if ((result = read_item(f, item)) == ok)
             towns[i] = item;
         else
             break;
@@ -106,10 +106,10 @@ status_code input(FILE *f, town towns[], int *count)
     return result;
 }
 
-status_code read_item(FILE *f, town *item)
+status_code read_item(FILE *f, town item)
 {
     status_code result = ok;
-    if ((read_str(f, item->name, MAXLEN_TOWN_NAME) != ok) || (fscanf(f, "%d%ld", &(item->foundation_date), &(item->population)) != 2))
+    if ((read_str(f, item.name, MAXLEN_TOWN_NAME) != ok) || (fscanf(f, "%d%ld", &(item.foundation_date), &(item.population)) != 2))
     {
         if (feof(f))
             result = input_error;
@@ -118,8 +118,7 @@ status_code read_item(FILE *f, town *item)
     }
     else
         fgetc(f);
-    printf("%d\n", item->population);
-    return result;
+    printf("%s\n", item.name);
 }
 
 status_code read_str(FILE *f, char *str, int max_count)
