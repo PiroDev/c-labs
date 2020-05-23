@@ -1,0 +1,1 @@
+./main.exe st ~ test_out.txt

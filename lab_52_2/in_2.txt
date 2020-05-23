@@ -1,0 +1,19 @@
+./main.exe ft test_out.txt k
+
+test_out.txt:
+milk
+sds
+45
+3
+book
+sds
+45
+2
+nuts
+company
+44
+2
+egg
+bmk
+32
+2

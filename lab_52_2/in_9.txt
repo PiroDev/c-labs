@@ -1,0 +1,11 @@
+./main.exe st bad_in.txt text_out.txt
+
+bad_in.txt:
+milk
+bmk
+48
+2
+eggs
+32
+bmk
+2
