@@ -194,6 +194,7 @@ void print_array(film_array films, int count_films)
 {
     for (int i = 0; i < count_films; i++)
         print_film(films[i]);
+    printf("\n");
 }
 
 void print_film(film_struct film)
