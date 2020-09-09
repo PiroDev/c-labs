@@ -55,7 +55,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
             result = file_input_error;
         else if (*count_films == 0)
             result = empty_file_error;
-        else if (*count_films > MAX_STRUCTS_COUNT)
+        else if (*count_films >= MAX_STRUCTS_COUNT)
             result = too_many_structures;
         else
             result = ok;
