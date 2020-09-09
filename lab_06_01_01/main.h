@@ -13,7 +13,8 @@ typedef enum
     wrong_arguments_value = -3,
     file_input_error = -4,
     empty_file_error = -5,
-    wrong_year_format = -6
+    wrong_year_format = -6,
+    too_many_structures = -7
 } status_code;
 
 typedef struct

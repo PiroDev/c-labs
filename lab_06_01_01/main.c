@@ -43,7 +43,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
     f = fopen((const char *) fname, "r");
     if (f != NULL)
     {
-        while (result == ok)
+        while ((result == ok) && (count_films <= MAX_STRUCTS_COUNT))
         {
             film_struct temp = { .year = 0 };
             result = read_film(f, &temp);
@@ -55,6 +55,8 @@ status_code read_array(char *fname, film_array films, int *count_films)
             result = file_input_error;
         else if (*count_films == 0)
             result = empty_file_error;
+        else if (*count_films > MAX_STRUCTS_COUNT)
+            result = too_many_structures;
         else
             result = ok;
         fclose(f);
