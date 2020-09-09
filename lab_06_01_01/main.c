@@ -66,7 +66,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
 
 status_code read_film(FILE *f, film_struct *film)
 {
-    status_code result;
+    status_code result = ok;
     if (read_str(f, film->title, MAX_TITLE_LENGTH) \
         || read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
         result = file_input_error;
