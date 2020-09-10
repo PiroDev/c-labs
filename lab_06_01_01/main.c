@@ -14,7 +14,7 @@ status_code main_process(int argc, char **argv)
     status_code result = ok;
     if ((argc < 3) || (argc > 4))
         result = wrong_arguments_count; 
-    else if (!strcmp(argv[2], "title"))
+    if (!strcmp(argv[2], "title"))
     {
         if (strlen(argv[2]) > MAX_TITLE_LENGTH)
             result = too_long_input_string;
@@ -54,7 +54,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
     status_code result = ok;
     FILE *f = NULL;
     f = fopen((const char *) fname, "r");
-    if (f != NULL) // case 3
+    if (f != NULL)
     {
         while ((result == ok) && (*count_films <= MAX_STRUCTS_COUNT))
         {
@@ -182,7 +182,7 @@ status_code binary_search(film_array films, int count_films, char *field, char *
                     else
                         element_was_found = 1;
                     break;
-                }
+            }
         }
         if (element_was_found)
             print_film(films[i]);
