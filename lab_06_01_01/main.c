@@ -13,25 +13,38 @@ status_code main_process(int argc, char **argv)
 {
     status_code result = ok;
     if ((argc < 3) || (argc > 4))
-        result = wrong_arguments_count; // case 1
+        result = wrong_arguments_count; 
+    else if (!strcmp(argv[2], "title"))
+    {
+        if (strlen(argv[2]) > MAX_TITLE_LENGTH)
+            result = too_long_input_string;
+    }
+    else if (!strcmp(argv[2], "name"))
+    {
+        if (strlen(argv[2]) > MAX_SURNAME_LENGTH)
+            result = too_long_input_string;
+    }
+    else if (!strcmp(argv[2], "year"))
+    {
+        int number = 0;
+        result = str_to_int(argv[2], &number);
+    }
     else
-    { // case 2
-        if (!strcmp(argv[2], "title") || !strcmp(argv[2], "name") || !strcmp(argv[2], "year"))
+        result = wrong_arguments_value;
+
+    if (result == ok)
+    {
+        film_array films;
+        int count_films = 0;
+        result = read_array(argv[1], films, &count_films);
+        if (result == ok)
         {
-            film_array films;
-            int count_films = 0;
-            result = read_array(argv[1], films, &count_films);
-            if (result == ok)
-            {
-                sort_array(films, count_films, argv[2]);
-                if (argc == 3)
-                    print_array(films, count_films);
-                else
-                    binary_search(films, count_films, argv[2], argv[3]);
-            }
+            sort_array(films, count_films, argv[2]);
+            if (argc == 3)
+                print_array(films, count_films);
+            else
+                binary_search(films, count_films, argv[2], argv[3]);
         }
-        else
-            result = wrong_arguments_value;
     }
     return result;
 }
@@ -54,9 +67,9 @@ status_code read_array(char *fname, film_array films, int *count_films)
         if (!feof(f))
             result = file_input_error;
         else if (*count_films == 0)
-            result = empty_file_error; // case 5
+            result = empty_file_error;
         else if (*count_films >= MAX_STRUCTS_COUNT)
-            result = too_many_structures; // case 8
+            result = too_many_structures;
         else
             result = ok;
         fclose(f);
@@ -68,12 +81,12 @@ status_code read_array(char *fname, film_array films, int *count_films)
 
 status_code read_film(FILE *f, film_struct *film)
 {
-    status_code result = ok; // case 4, 10
+    status_code result = ok;
     if (read_str(f, film->title, MAX_TITLE_LENGTH) \
-|| read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
+        || read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
         result = file_input_error;
     else
-        fgetc(f); // считывает \n после fscanf
+        fgetc(f);
     return result;
 }
 
@@ -98,12 +111,12 @@ void sort_array(film_array films, int count_films, char *field)
 {
     for (int i = 0; i < count_films - 1; i++)
         for (int j = 0; j < count_films - i - 1; j++)
-        if (compare_films_by_field(field, films[j], films[j + 1]) > 0)
-        {
-            film_struct temp = films[j];
-            films[j] = films[j + 1];
-            films[j + 1] = temp;
-        }
+            if (compare_films_by_field(field, films[j], films[j + 1]) > 0)
+            {
+                film_struct temp = films[j];
+                films[j] = films[j + 1];
+                films[j + 1] = temp;
+            }
 }
 
 int compare_films_by_field(char *field, film_struct film_1, film_struct film_2)
@@ -134,7 +147,7 @@ status_code binary_search(film_array films, int count_films, char *field, char *
         field_type = 'y';
         result = str_to_int(key, &year);
         if (year <= 0)
-            result = wrong_year_format; // case 6, 7, 9
+            result = wrong_year_format;
     }
     if (result == ok)
     {
@@ -145,31 +158,31 @@ status_code binary_search(film_array films, int count_films, char *field, char *
             i = (start + end) / 2;
             switch (field_type)
             {
-            case 't':
-                if (strcmp(films[i].title, key) > 0)
-                    end = i - 1;
-                else if (strcmp(films[i].title, key) < 0)
-                    start = i + 1;
-                else
-                    element_was_found = 1;
-                break;
-            case 'n':
-                if (strcmp(films[i].surname, key) > 0)
-                    end = i - 1;
-                else if (strcmp(films[i].surname, key) < 0)
-                    start = i + 1;
-                else
-                    element_was_found = 1;
-                break;
-            case 'y':
-                if (films[i].year > year)
-                    end = i - 1;
-                else if (films[i].year < year)
-                    start = i + 1;
-                else
-                    element_was_found = 1;
-                break;
-            }
+                case 't':
+                    if (strcmp(films[i].title, key) > 0)
+                        end = i - 1;
+                    else if (strcmp(films[i].title, key) < 0)
+                        start = i + 1;
+                    else
+                        element_was_found = 1;
+                    break;
+                case 'n':
+                    if (strcmp(films[i].surname, key) > 0)
+                        end = i - 1;
+                    else if (strcmp(films[i].surname, key) < 0)
+                        start = i + 1;
+                    else
+                        element_was_found = 1;
+                    break;
+                case 'y':
+                    if (films[i].year > year)
+                        end = i - 1;
+                    else if (films[i].year < year)
+                        start = i + 1;
+                    else
+                        element_was_found = 1;
+                    break;
+                }
         }
         if (element_was_found)
             print_film(films[i]);
