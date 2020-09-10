@@ -54,14 +54,13 @@ status_code read_array(char *fname, film_array films, int *count_films)
     f = fopen((const char *) fname, "r");
     if (f != NULL)
     {
-        while ((result == ok) && (*count_films <= MAX_STRUCTS_COUNT))
+        while ((result == ok) && (*count_films < MAX_STRUCTS_COUNT))
         {
             film_struct temp = { .year = 0 };
             result = read_film(f, &temp);
             films[*count_films] = temp;
             *count_films += 1;
         }
-        *count_films -= 1;
         if (!feof(f))
             result = file_input_error;
         else if (*count_films == 0)

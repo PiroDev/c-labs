@@ -26,7 +26,6 @@ typedef struct
 
 typedef film_struct film_array[MAX_STRUCTS_COUNT];
 
-status_code main_process(int, char **);
 status_code read_array(char *, film_array, int *);
 status_code read_film(FILE *, film_struct *);
 status_code read_str(FILE *, char *, int);
