@@ -5,33 +5,31 @@
 int main(int argc, char **argv)
 {
     status_code result = ok;
-    result = main_process(argc, argv);
-    return result;
-}
-
-status_code main_process(int argc, char **argv)
-{
-    status_code result = ok;
     if ((argc < 3) || (argc > 4))
-        result = wrong_arguments_count; 
-    if (!strcmp(argv[2], "title"))
-    {
-        if (strlen(argv[2]) > MAX_TITLE_LENGTH)
-            result = too_long_input_string;
-    }
-    else if (!strcmp(argv[2], "name"))
-    {
-        if (strlen(argv[2]) > MAX_SURNAME_LENGTH)
-            result = too_long_input_string;
-    }
-    else if (!strcmp(argv[2], "year"))
-    {
-        int number = 0;
-        result = str_to_int(argv[2], &number);
-    }
+        result = wrong_arguments_count;
     else
-        result = wrong_arguments_value;
-
+    {
+        if (!strcmp(argv[2], "title"))
+        {
+            if ((argc == 4) && (strlen(argv[3]) > MAX_TITLE_LENGTH))
+                result = too_long_input_string;
+        }
+        else if (!strcmp(argv[2], "name"))
+        {
+            if ((argc == 4) && strlen(argv[3]) > MAX_SURNAME_LENGTH)
+                result = too_long_input_string;
+        }
+        else if (!strcmp(argv[2], "year"))
+        {
+            if (argc == 4)
+            {
+                int number = 0;
+                result = str_to_int(argv[3], &number);
+            }
+        }
+        else
+            result = wrong_arguments_value;
+    }
     if (result == ok)
     {
         film_array films;
