@@ -13,9 +13,9 @@ status_code main_process(int argc, char **argv)
 {
     status_code result = ok;
     if ((argc < 3) || (argc > 4))
-        result = wrong_arguments_count;
+        result = wrong_arguments_count; // case 1
     else
-    {
+    { // case 2
         if (!strcmp(argv[2], "title") || !strcmp(argv[2], "name") || !strcmp(argv[2], "year"))
         {
             film_array films;
@@ -41,7 +41,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
     status_code result = ok;
     FILE *f = NULL;
     f = fopen((const char *) fname, "r");
-    if (f != NULL)
+    if (f != NULL) // case 3
     {
         while ((result == ok) && (*count_films <= MAX_STRUCTS_COUNT))
         {
@@ -54,9 +54,9 @@ status_code read_array(char *fname, film_array films, int *count_films)
         if (!feof(f))
             result = file_input_error;
         else if (*count_films == 0)
-            result = empty_file_error;
+            result = empty_file_error; // case 5
         else if (*count_films >= MAX_STRUCTS_COUNT)
-            result = too_many_structures;
+            result = too_many_structures; // case 8
         else
             result = ok;
         fclose(f);
@@ -68,9 +68,9 @@ status_code read_array(char *fname, film_array films, int *count_films)
 
 status_code read_film(FILE *f, film_struct *film)
 {
-    status_code result = ok;
+    status_code result = ok; // case 4, 10
     if (read_str(f, film->title, MAX_TITLE_LENGTH) \
-        || read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
+|| read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
         result = file_input_error;
     else
         fgetc(f); // считывает \n после fscanf
@@ -134,7 +134,7 @@ status_code binary_search(film_array films, int count_films, char *field, char *
         field_type = 'y';
         result = str_to_int(key, &year);
         if (year <= 0)
-            result = wrong_year_format;
+            result = wrong_year_format; // case 6, 7, 9
     }
     if (result == ok)
     {
