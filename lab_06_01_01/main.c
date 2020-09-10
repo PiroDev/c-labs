@@ -61,6 +61,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
             films[*count_films] = temp;
             *count_films += 1;
         }
+        *count_films -= 1;
         if (!feof(f))
             result = file_input_error;
         else if (*count_films == 0)
