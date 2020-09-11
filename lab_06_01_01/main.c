@@ -84,7 +84,7 @@ status_code read_film(FILE *f, film_struct *film)
         || read_str(f, film->surname, MAX_SURNAME_LENGTH) || (fscanf(f, "%d", &film->year) != 1))
         result = file_input_error;
     else
-        fscanf(f, "%d");
+        fgetc(f);
     return result;
 }
 
