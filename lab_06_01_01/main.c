@@ -44,7 +44,6 @@ int main(int argc, char **argv)
                 binary_search(films, count_films, argv[2], argv[3]);
         }
     }
-    printf("%d", result);
     return result;
 }
 
