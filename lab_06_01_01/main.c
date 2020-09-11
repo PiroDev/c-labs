@@ -94,16 +94,9 @@ status_code read_str(FILE *f, char *str, int max_count)
     int count = 0;
     char c = 0;
     while ((count < max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
-    {
-        str[count] = c;
-        count++;
-    }
+        str[count++] = c;
     if ((c != '\n') && (c != EOF))
         result = file_input_error;
-    else if (count >= max_count)
-        result = too_long_input_string;
-    if (count < max_count)
-        str[count + 1] = '\0';
     return result;
 }
 
@@ -201,6 +194,8 @@ status_code str_to_int(char *string, int *number)
     while (((c = string[i++]) != '\0') && (c <= '9') && (c >= '0'))
         *number = (*number) * 10 + (c - '0');
     if (c != '\0')
+        result = wrong_year_format;
+    else if (*number == 0)
         result = wrong_year_format;
     return result;
 }
