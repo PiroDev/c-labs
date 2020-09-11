@@ -199,6 +199,7 @@ status_code str_to_int(char *string, int *number)
             break;
         }
         *number = (*number) * 10 + (c - '0');
+        i++;
     }
     if (c != '\0')
         result = wrong_year_format;
