@@ -81,7 +81,7 @@ status_code read_str(FILE *f, char *str, int max_count)
     char c = 0;
     while ((count < max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
         str[count++] = c;
-    if (c != '\n')
+    if ((c != '\n') && (c != EOF))
         result = file_input_error;
     return result;
 }
