@@ -5,6 +5,27 @@
 int main(int argc, char **argv)
 {
     status_code result = ok;
+    result = input_check(argc, argv);
+    if (result == ok)
+    {
+        film_array films;
+        int count_films = 0;
+        result = read_array(argv[1], films, &count_films);
+        if (result == ok)
+        {
+            sort_array(films, count_films, argv[2]);
+            if (argc == 3)
+                print_array(films, count_films);
+            else
+                binary_search(films, count_films, argv[2], argv[3]);
+        }
+    }
+    return result;
+}
+
+status_code input_check(int argc, char **argv)
+{
+    status_code result = ok;
     if ((argc < 3) || (argc > 4))
         result = wrong_arguments_count;
     else
@@ -29,20 +50,6 @@ int main(int argc, char **argv)
         }
         else
             result = wrong_arguments_value;
-    }
-    if (result == ok)
-    {
-        film_array films;
-        int count_films = 0;
-        result = read_array(argv[1], films, &count_films);
-        if (result == ok)
-        {
-            sort_array(films, count_films, argv[2]);
-            if (argc == 3)
-                print_array(films, count_films);
-            else
-                binary_search(films, count_films, argv[2], argv[3]);
-        }
     }
     return result;
 }
@@ -193,7 +200,7 @@ status_code str_to_int(char *string, int *number)
     char c = 0;
     while (((c = string[i]) != '\0') && (c <= '9') && (c >= '0'))
     {
-        if ((i == 0) && (c >= '1'))
+        if ((i == 0) && (c < '1'))
         {
             result = wrong_year_format;
             break;
