@@ -186,7 +186,7 @@ status_code str_to_int(char *string, int *number)
     }
     if (c != '\0')
         result = wrong_year_format;
-    else if ((*number < 1895) || (*number > 2020))
+    else if (*number <= 0)
         result = wrong_year_format;
     return result;
 }
