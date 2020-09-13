@@ -68,7 +68,7 @@ status_code read_film(FILE *f, film_struct *film)
         read_str(f, film->surname, MAX_SURNAME_LENGTH) || \
             (fscanf(f, "%d", &film->year) != 1))
         result = file_input_error;
-    else if (film->year <= 0)
+    else if ((film->year < 1895) || (film->year > 2020))
         result = wrong_year_format;
     else
         fscanf(f, " ");
