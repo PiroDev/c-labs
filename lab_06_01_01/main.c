@@ -198,19 +198,11 @@ status_code str_to_int(char *string, int *number)
     *number = 0;
     int i = 0;
     char c = 0;
-    while (((c = string[i]) != '\0') && (c <= '9') && (c >= '0'))
-    {
-        if ((i == 0) && (c < '1'))
-        {
-            result = wrong_year_format;
-            break;
-        }
+    while (((c = string[i++]) != '\0') && (c <= '9') && (c >= '0'))
         *number = (*number) * 10 + (c - '0');
-        i++;
-    }
     if (c != '\0')
         result = wrong_year_format;
-    else if ((*number < 1895) || (*number > 2020))
+    else if (*number <= 0)
         result = wrong_year_format;
     return result;
 }
