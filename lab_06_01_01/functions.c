@@ -42,7 +42,9 @@ status_code read_array(char *fname, film_array films, int *count_films)
     {
         while (!feof(f) && (*count_films < MAX_STRUCTS_COUNT) && (result == ok))
         {
-            film_struct temp = { .year = 0 };
+            film_struct temp = { .year = 0,
+            .surname = "",
+            .title = "" };
             result = read_film(f, &temp);
             if (result == ok)
             {
@@ -68,7 +70,7 @@ status_code read_film(FILE *f, film_struct *film)
         read_str(f, film->surname, MAX_SURNAME_LENGTH) || \
             (fscanf(f, "%d\n", &film->year) != 1))
         result = file_input_error;
-    else if (film->year <= 0)
+    else if ((film->year <= 0) || (film->year >= 9999))
         result = wrong_year_format;
     return result;
 }
@@ -124,8 +126,6 @@ status_code binary_search(film_array films, int count_films, char *field, char *
     {
         field_type = 'y';
         result = str_to_int(key, &year);
-        if (year <= 0)
-            result = wrong_year_format;
     }
     if (result == ok)
     {
@@ -165,10 +165,7 @@ status_code binary_search(film_array films, int count_films, char *field, char *
         if (element_was_found)
             print_film(films[i]);
         else
-        {
             fprintf(stdout, "Not found\n");
-            result = file_input_error;
-        }
     }
     return result;
 }
@@ -187,7 +184,7 @@ status_code str_to_int(char *string, int *number)
     }
     if (c != '\0')
         result = wrong_year_format;
-    else if (*number <= 0)
+    else if ((*number <= 0) || (*number >= 9999))
         result = wrong_year_format;
     return result;
 }
