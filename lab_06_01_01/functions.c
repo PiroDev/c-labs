@@ -58,7 +58,8 @@ status_code read_array(char *fname, film_array films, int *count_films)
             result = too_many_structures;
         fclose(f);
     }
-    result = file_input_error;
+    else
+        result = file_input_error;
     return result;
 }
 
@@ -81,7 +82,9 @@ status_code read_str(FILE *f, char *str, int max_count)
     char c = 0;
     while ((count < max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
         str[count++] = c;
-    if ((c != '\n') && (c != EOF))
+    if (count == max_count)
+        result = too_long_input_string;
+    else if (feof(f))
         result = file_input_error;
     return result;
 }
