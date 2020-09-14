@@ -66,16 +66,10 @@ status_code read_film(FILE *f, film_struct *film)
     status_code result = ok;
     if (read_str(f, film->title, MAX_TITLE_LENGTH) || \
         read_str(f, film->surname, MAX_SURNAME_LENGTH) || \
-            (fscanf(f, "%d", &film->year) != 1))
+            (fscanf(f, "%d\n", &film->year) != 1))
         result = file_input_error;
     else if (film->year <= 0)
         result = wrong_year_format;
-    else
-    {
-        int c = fgetc(f);
-        if ((c != '\n') && (c != EOF))
-            result = file_input_error;
-    }
     return result;
 }
 
