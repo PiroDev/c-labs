@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     {
         film_array films;
         int count_films = 0;
-        result = read_array(argv[1], films, &count_films);
+        // result = read_array(argv[1], films, &count_films);
         // if (result == ok)
         // {
         //     sort_array(films, count_films, argv[2]);
