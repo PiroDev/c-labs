@@ -71,7 +71,7 @@ status_code read_film(FILE *f, film_struct *film)
     else if (film->year <= 0)
         result = wrong_year_format;
     else
-        fscanf(f, " ");
+        fgetc(f);
     return result;
 }
 
