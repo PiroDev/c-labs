@@ -54,7 +54,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
         }
         if (*count_films == 0)
             result = empty_file_error;
-        else if ((*count_films >= MAX_STRUCTS_COUNT) && !feof(f))
+        else if ((*count_films == MAX_STRUCTS_COUNT) && !feof(f))
             result = too_many_structures;
         fclose(f);
     }
@@ -66,12 +66,15 @@ status_code read_array(char *fname, film_array films, int *count_films)
 status_code read_film(FILE *f, film_struct *film)
 {
     status_code result = ok;
-    if (read_str(f, film->title, MAX_TITLE_LENGTH) || \
-        read_str(f, film->surname, MAX_SURNAME_LENGTH) || \
-            (fscanf(f, "%d\n", &film->year) != 1))
+    if (!read_str(f, film->title, MAX_TITLE_LENGTH) && \
+        !read_str(f, film->surname, MAX_SURNAME_LENGTH) && \
+            (fscanf(f, "%d\n", &film->year) == 1))
+    {
+        if ((film->year <= 0) || (film->year >= 9999))
+            result = wrong_year_format;
+    }
+    else
         result = file_input_error;
-    else if ((film->year <= 0) || (film->year >= 9999))
-        result = wrong_year_format;
     return result;
 }
 
@@ -82,7 +85,7 @@ status_code read_str(FILE *f, char *str, int max_count)
     char c = 0;
     while ((count <= max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
         str[count++] = c;
-    if (count == max_count)
+    if (count > max_count)
         result = too_long_input_string;
     else if (feof(f))
         result = file_input_error;
