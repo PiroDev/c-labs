@@ -167,7 +167,10 @@ status_code binary_search(film_array films, int count_films, char *field, char *
         if (element_was_found)
             print_film(films[i]);
         else
+        {
             fprintf(stdout, "Not found\n");
+            result = file_input_error;
+        }
     }
     return result;
 }
