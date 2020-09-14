@@ -14,8 +14,8 @@ int main(int argc, char **argv)
             sort_array(films, count_films, argv[2]);
             if (argc == 3)
                 print_array(films, count_films);
-            else
-                binary_search(films, count_films, argv[2], argv[3]);
+            // else
+            //     binary_search(films, count_films, argv[2], argv[3]);
         }
     }
     return result;
