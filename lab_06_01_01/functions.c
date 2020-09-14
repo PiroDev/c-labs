@@ -80,7 +80,7 @@ status_code read_str(FILE *f, char *str, int max_count)
     status_code result = ok;
     int count = 0;
     char c = 0;
-    while ((count < max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
+    while ((count <= max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
         str[count++] = c;
     if (count == max_count)
         result = too_long_input_string;
