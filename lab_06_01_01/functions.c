@@ -66,15 +66,19 @@ status_code read_array(char *fname, film_array films, int *count_films)
 status_code read_film(FILE *f, film_struct *film)
 {
     status_code result = ok;
-    if (!read_str(f, film->title, MAX_TITLE_LENGTH) && \
-        !read_str(f, film->surname, MAX_SURNAME_LENGTH) && \
-            (fscanf(f, "%d\n", &film->year) == 1))
-    {
-        if ((film->year <= 0) || (film->year >= 9999))
-            result = wrong_year_format;
-    }
-    else
+    if (read_str(f, film->title, MAX_TITLE_LENGTH) || \
+            read_str(f, film->surname, MAX_SURNAME_LENGTH))
         result = file_input_error;
+    else
+    {
+        int number = 0;
+        char temp[MAX_YEAR_LENGTH + 1] = { '\0' };
+        result = read_str(f, temp, MAX_YEAR_LENGTH);
+        if (result || str_to_int(temp, &number) || (number <= 0))
+            result = wrong_year_format;
+        else
+            film->year = number;
+    }
     return result;
 }
 
@@ -87,8 +91,6 @@ status_code read_str(FILE *f, char *str, int max_count)
         str[count++] = c;
     if (count > max_count)
         result = too_long_input_string;
-    else if (feof(f))
-        result = file_input_error;
     return result;
 }
 

@@ -6,6 +6,7 @@
 #define MAX_TITLE_LENGTH 25
 #define MAX_SURNAME_LENGTH 25
 #define MAX_STRUCTS_COUNT 15
+#define MAX_YEAR_LENGTH 4
 
 typedef enum
 {
