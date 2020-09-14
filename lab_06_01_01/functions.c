@@ -58,8 +58,7 @@ status_code read_array(char *fname, film_array films, int *count_films)
             result = too_many_structures;
         fclose(f);
     }
-    else
-        result = file_input_error;
+    result = file_input_error;
     return result;
 }
 
