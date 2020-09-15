@@ -1,5 +1,14 @@
+/**
+ * \file input_output.c
+ * \brief В этом файле реализованы функции ввода-вывода структур и массивов структур
+*/
 #include "input_output.h"
 
+/**
+ * \param argc - количество переданных аргументов
+ * \param argv - массив с аргументами командной строки
+ * \return Код состояния
+*/
 status_code input_check(int argc, char **argv)
 {
     status_code result = ok;
@@ -22,7 +31,7 @@ status_code input_check(int argc, char **argv)
             if (argc == 4)
             {
                 int number = 0;
-                result = str_to_int(argv[3], &number);
+                result = string_year_to_int(argv[3], &number);
             }
         }
         else
@@ -93,7 +102,7 @@ status_code read_str(FILE *f, char *str, int max_count)
 }
 
 
-status_code str_to_int(char *string, int *number)
+status_code string_year_to_int(char *string, int *number)
 {
     status_code result = ok;
     *number = 0;
