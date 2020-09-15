@@ -71,7 +71,7 @@ status_code read_film(FILE *f, film_struct *film)
         fscanf(f, "%*[\n]");
         if (!(result = read_str(f, film->surname, MAX_SURNAME_LENGTH)))
         {
-            fscanf(f, "%*[\n]");
+           fscanf(f, "%*[\n]");
             if (fscanf(f, "%d\n", &film->year) != 1)
                 result = file_input_error;
         }
@@ -82,12 +82,13 @@ status_code read_film(FILE *f, film_struct *film)
 status_code read_str(FILE *f, char *str, int max_count)
 {
     status_code result = ok;
-    int count = 0;
-    char c = 0;
-    while ((count <= max_count) && ((c = fgetc(f)) != EOF) && (c != '\n'))
-        str[count++] = c;
-    if (count > max_count)
-        result = too_long_input_string;
+    if (fgets(str, MAX_TITLE_LENGTH, f) == NULL)
+        result = file_input_error;
+    else
+    {
+        if (str[strlen(str) - 1] == '\n')
+            str[strlen(str) - 1] = '\0';
+    }
     return result;
 }
 
