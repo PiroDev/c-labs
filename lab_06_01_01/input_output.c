@@ -40,6 +40,12 @@ status_code input_check(int argc, char **argv)
     return result;
 }
 
+/**
+ * \param fname - имя файла со структурами
+ * \param films - массив структур
+ * \param count_films - количество элементов в массиве структур
+ * \return Код состояния
+*/
 status_code read_array(char *fname, film_array films, int *count_films)
 {
     status_code result = ok;
@@ -70,12 +76,17 @@ status_code read_array(char *fname, film_array films, int *count_films)
     return result;
 }
 
+/**
+ * \param f - файловый дескриптор
+ * \param film - структура
+ * \return Код состояния
+*/
 status_code read_film(FILE *f, film_struct *film)
 {
     status_code result = ok;
     if (!(result = read_str(f, film->title, MAX_TITLE_LENGTH)))
     {
-        fscanf(f, "%*[\n]");
+        fscanf(f, "%*[\n]"); /* Считывание всех символов перевода строки после прочитанной строки */
         if (!(result = read_str(f, film->surname, MAX_SURNAME_LENGTH)))
         {
            fscanf(f, "%*[\n]");
@@ -88,6 +99,12 @@ status_code read_film(FILE *f, film_struct *film)
     return result;
 }
 
+/**
+ * \param f - файловый дескриптор
+ * \param str - строка, в которую осуществляется считывание
+ * \param max_count - максимально допустимая длина считываемой строки
+ * \return Код состояния
+*/
 status_code read_str(FILE *f, char *str, int max_count)
 {
     status_code result = ok;
@@ -101,7 +118,11 @@ status_code read_str(FILE *f, char *str, int max_count)
     return result;
 }
 
-
+/**
+ * \param string - строка для перевода
+ * \param number - число, в которое осуществляется запись результата
+ * \return Код состояния
+*/
 status_code string_year_to_int(char *string, int *number)
 {
     status_code result = ok;
@@ -121,12 +142,20 @@ status_code string_year_to_int(char *string, int *number)
     return result;
 }
 
+/**
+ * \param fname - имя файла со структурами
+ * \param films - массив структур
+ * \param count_films - количество элементов в массиве структур
+*/
 void print_array(film_array films, int count_films)
 {
     for (int i = 0; i < count_films; i++)
         print_film(films[i]);
 }
 
+/**
+ * \param film - структура, которую нужно вывести на экран
+*/
 void print_film(film_struct film)
 {
     fprintf(stdout, "%s\n%s\n%d\n", film.title, film.surname, film.year);

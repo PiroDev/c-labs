@@ -8,7 +8,6 @@
  * \param films - массив структур
  * \param count_films - количество элементов в массиве структур
  * \param field - поле, по которому осуществляется сортировка массива структур
- * \return Код состояния
 */
 void sort_array(film_array films, int count_films, char *field)
 {
