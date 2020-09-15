@@ -1,21 +1,31 @@
+/**
+ * \file main.c
+ * \brief В этом файле находится точка входа в программу
+*/
 #include "functions.h"
 
+/**
+ * \brief Точка входа в программу
+ * 
+ * Считывает имя файла и передает управление другим функциям в зависимости от кода состояния
+ * \return Код состояния
+ */
 int main(int argc, char **argv)
 {
-    status_code result = ok;
-    result = input_check(argc, argv);
+    status_code result = ok; /* код состояния */
+    result = input_check(argc, argv); /* проверка введенных аргументов на корректность*/
     if (result == ok)
     {
-        film_array films;
-        int count_films = 0;
-        result = read_array(argv[1], films, &count_films);
+        film_array films; /* массив для хранения структур */
+        int count_films = 0; /* переменная для хранения количества структур в массиве */
+        result = read_array(argv[1], films, &count_films); /* считывание структур в массив */
         if (result == ok)
         {
-            sort_array(films, count_films, argv[2]);
+            sort_array(films, count_films, argv[2]); /* сортировка массива по выбранному полю */
             if (argc == 3)
-                print_array(films, count_films);
+                print_array(films, count_films); /* вывод отсортированного массива на экран */
             else
-                binary_search(films, count_films, argv[2], argv[3]);
+                binary_search(films, count_films, argv[2], argv[3]); /* бинарный поиск по ключу */
         }
     }
     return result;
