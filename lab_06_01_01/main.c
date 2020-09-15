@@ -2,7 +2,7 @@
  * \file main.c
  * \brief В этом файле находится точка входа в программу
 */
-#include "functions.h"
+#include "struct_functions.h"
 
 /**
  * \brief Точка входа в программу
