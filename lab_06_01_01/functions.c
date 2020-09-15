@@ -74,7 +74,7 @@ status_code read_film(FILE *f, film_struct *film)
         int number = 0;
         char temp[MAX_YEAR_LENGTH + 1] = { '\0' };
         result = read_str(f, temp, MAX_YEAR_LENGTH);
-        if (result || str_to_int(temp, &number) || (number <= 0))
+        if (result || str_to_int(temp, &number))
             result = wrong_year_format;
         else
             film->year = number;
