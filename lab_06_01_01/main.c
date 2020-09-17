@@ -25,7 +25,13 @@ int main(int argc, char **argv)
             if (argc == 3)
                 print_array(films, count_films); /* вывод отсортированного массива на экран */
             else
-                binary_search(films, count_films, argv[2], argv[3]); /* бинарный поиск по ключу */
+            {
+                film_struct temp_film = film_constructor("year", "0");
+                if (binary_search(films, count_films, argv[2], argv[3], &temp_film)) /* бинарный поиск по ключу */
+                    print_film(&temp_film);
+                else
+                    fprintf(stdout, "Not found\n");
+            }
         }
     }
     return result;

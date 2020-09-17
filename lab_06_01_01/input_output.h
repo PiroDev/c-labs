@@ -10,6 +10,16 @@
 #include "structs.h"
 
 /**
+ * \brief Максимально допустимый год выхода фильма на экран
+*/
+#define MAX_YEAR 9999
+
+/**
+ * \brief Минимально допустимый год выхода фильма на экран
+*/
+#define MIN_YEAR 1
+
+/**
  * \brief Тип для кодов состояний
  * \param ok - ошибок нет
  * \param too_long_input_string - слишком длинное поле
@@ -65,6 +75,6 @@ void print_array(film_array, int);
 /**
  * \brief Функция для вывода одной структуры на экран
 */
-void print_film(film_struct);
+void print_film(film_struct *);
 
 #endif

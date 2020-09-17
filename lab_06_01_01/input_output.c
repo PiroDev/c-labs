@@ -137,7 +137,7 @@ status_code string_year_to_int(char *string, int *number)
     }
     if (c != '\0')
         result = wrong_year_format;
-    else if ((*number <= 0) || (*number >= 9999))
+    else if ((*number < MIN_YEAR) || (*number > MAX_YEAR))
         result = wrong_year_format;
     return result;
 }
@@ -150,13 +150,13 @@ status_code string_year_to_int(char *string, int *number)
 void print_array(film_array films, int count_films)
 {
     for (int i = 0; i < count_films; i++)
-        print_film(films[i]);
+        print_film(&films[i]);
 }
 
 /**
  * \param film - структура, которую нужно вывести на экран
 */
-void print_film(film_struct film)
+void print_film(film_struct *film)
 {
-    fprintf(stdout, "%s\n%s\n%d\n", film.title, film.surname, film.year);
+    fprintf(stdout, "%s\n%s\n%d\n", film->title, film->surname, film->year);
 }

@@ -15,11 +15,21 @@ void sort_array(film_array, int, char *);
 /**
  * \brief Функция для сравнения двух структур по заданному полю
 */
-int compare_films_by_field(char *, film_struct, film_struct);
+int compare_films_by_field(char *, film_struct *, film_struct *);
 
 /**
  * \brief Функция для бинарного поиска в массиве структур по заданному полю и значению ключа
 */
-status_code binary_search(film_array, int, char *, char *);
+status_code binary_search(film_array, int, char *, char *, film_struct *);
+
+/**
+ * \brief Функция для обмена значений полей двух структур
+*/
+void swap(film_struct *, film_struct *);
+
+/**
+ * \brief Конструктор для структуры
+*/
+film_struct film_constructor(char *, char *);
 
 #endif
