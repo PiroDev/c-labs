@@ -150,7 +150,7 @@ status_code string_year_to_int(char *string, int *number)
 void print_array(film_array films, int count_films)
 {
     for (int i = 0; i < count_films; i++)
-        print_film(&films[i]);
+        print_film(films + i);
 }
 
 /**

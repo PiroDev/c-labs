@@ -15,8 +15,8 @@ void sort_array(film_array films, int count_films, char *field)
     for (int i = 0; i < count_films - 1; i++)
         for (int j = 0; j < count_films - i - 1; j++)
             /* Сравнение и обмен элементов */
-            if (compare_films_by_field(field, &films[j], &films[j + 1]) > 0)
-                swap(&films[j], &films[j + 1]);
+            if (compare_films_by_field(field, films + j, films + j + 1) > 0)
+                swap(films + j, films + j + 1);
 }
 
 /**
