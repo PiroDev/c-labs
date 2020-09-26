@@ -23,4 +23,4 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
 .PHONY : clean
 clean :
 	$(RM) *.exe
-	cd out;	$(RM) 1.o
+	cd out;	$(RM) *.o

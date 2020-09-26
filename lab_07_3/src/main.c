@@ -72,7 +72,7 @@ int main(int argc, char **argv)
             result = error_wrong_command_line_args;
     }
     else
-        result = error_wrong_number_of_command_line_args;
+        result = error_wrong_number_of_args;
 
     return result;
 }

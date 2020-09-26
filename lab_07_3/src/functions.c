@@ -20,7 +20,7 @@ void mysort(void *array, void *end_of_array, size_t size, int (*cmp)(const void 
 {
     for (int i = 0; (char *) array + i * size < (char *) end_of_array; i++)
         for (int j = is_even(i); (char *) array + (j + 1) * size < (char *) end_of_array; j += 2)
-            if (cmp((char *) array + j * size, (char *) array + (j + 1) * size))
+            if (cmp((char *) array + j * size, (char *) array + (j + 1) * size) > 0)
                 swap((char *) array + j * size, (char *) array + (j + 1) * size, size);
 }
 

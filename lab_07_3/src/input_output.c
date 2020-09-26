@@ -27,7 +27,7 @@ status_code input_from_text_file(char *fname, int **array, int **end_of_array)
             count_numbers++;
 
         if (!feof(f))
-            result = error_cannot_read_value_from_file;
+            result = error_wrong_value_in_file;
         else if (count_numbers == 0)
             result = error_empty_input_file;
         else
