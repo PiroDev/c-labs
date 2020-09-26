@@ -65,7 +65,6 @@ int main(int argc, char **argv)
                 /* Освобождение памяти и обнуление указателей */
                 free_resources(&array, &end_of_array);
                 free_resources(&filtered_array, &end_of_filtered_array);
-        
             }
         }
         else

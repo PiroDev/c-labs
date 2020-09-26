@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c99 -Wall -Werror -pedantic
+CFLAGS := -std=c99 -Wall -Werror -pedantic -Wextra
 OBJDIR := out
 OBJS := $(OBJDIR)/functions.o $(OBJDIR)/input_output.o
 SRCDIR := src

@@ -33,9 +33,9 @@ int key(const int *array, const int *end_of_array, int **filtered_array, int **e
     for (i = 1; (end_of_array - i >= array) && (*(end_of_array - i) >= 0); i++);
 
     /* Расчет размера отфильтрованного массива */
-    size_t filtered_array_size = (int) (end_of_array - array);
+    int filtered_array_size = (int) (end_of_array - array);
     if (end_of_array - i >= array)
-        filtered_array_size -= i;
+        filtered_array_size -= i - 1;
 
     if (filtered_array_size > 0)
     {
