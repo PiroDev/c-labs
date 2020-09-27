@@ -36,7 +36,7 @@ int main(int argc, char **argv)
             if (!result)
             {
                 /* Сортировка массива и вывод результата в файл */
-                mysort(array, end_of_array, sizeof(int), cmp_int);
+                mysort(array, (int) (end_of_array - array), sizeof(int), cmp_int);
                 result = output_in_text_file(output_fname, array, end_of_array);
             }
 
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
                 if (!result)
                 {
                     /* Сортировка отфильтрованного массива и вывод результата в файл */
-                    mysort(filtered_array, end_of_filtered_array, sizeof(int), cmp_int);
+                    mysort(filtered_array, (int) (end_of_filtered_array - filtered_array), sizeof(int), cmp_int);
                     result = output_in_text_file(output_fname, filtered_array, end_of_filtered_array);
                 }
 

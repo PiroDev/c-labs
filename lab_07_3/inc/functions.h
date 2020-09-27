@@ -15,7 +15,7 @@ void free_resources(int **, int **);
 /**
  * \brief Универсальная функция сортировки (модифицированный метод пузырька)
 */
-void mysort(void *, void *, size_t, int (*)(const void *, const void *));
+void mysort(void *, int, size_t, int (*)(const void *, const void *));
 
 /**
  * \brief Функция-фильтр

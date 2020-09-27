@@ -16,12 +16,14 @@ void free_resources(int **array, int **end_of_array)
     *end_of_array = NULL;
 }
 
-void mysort(void *array, void *end_of_array, size_t size, int (*cmp)(const void *, const void *))
+void mysort(void *array, int array_size, size_t size, int (*cmp)(const void *, const void *))
 {
-    for (int i = 0; (char *) array + i * size < (char *) end_of_array; i++)
-        for (int j = is_even(i); (char *) array + (j + 1) * size < (char *) end_of_array; j += 2)
-            if (cmp((char *) array + j * size, (char *) array + (j + 1) * size) > 0)
-                swap((char *) array + j * size, (char *) array + (j + 1) * size, size);
+    char *p_start = (char *) array;
+    char *p_end = p_start + array_size * size;
+    for (int i = 0; p_start + i * size < p_end; i++)
+        for (int j = is_even(i); p_start + (j + 1) * size < p_end; j += 2)
+            if (cmp(p_start + j * size, p_start + (j + 1) * size) > 0)
+                swap(p_start + j * size, p_start + (j + 1) * size, size);
 }
 
 int key(const int *array, const int *end_of_array, int **filtered_array, int **end_of_filtered_array)
