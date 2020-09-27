@@ -18,6 +18,7 @@ app.exe : $(OBJS) $(OBJDIR)/main.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
+	mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY : clean
