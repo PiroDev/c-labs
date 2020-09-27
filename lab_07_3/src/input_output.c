@@ -33,15 +33,20 @@ status_code input_from_text_file(char *fname, int **array, int **end_of_array)
         else
         {
             *array = (int *) malloc(count_numbers * sizeof(int));
-            *end_of_array = *array + count_numbers;
-
-            rewind(f);
-            current_number = 0;
-            while (current_number < count_numbers)
+            if (*array != NULL)
             {
-                fscanf(f, "%d", *array + current_number);
-                current_number++;
+                *end_of_array = *array + count_numbers;
+
+                rewind(f);
+                current_number = 0;
+                while (current_number < count_numbers)
+                {
+                    fscanf(f, "%d", *array + current_number);
+                    current_number++;
+                }
             }
+            else
+                result = error_out_of_memory;
         }
         fclose(f);
     }
