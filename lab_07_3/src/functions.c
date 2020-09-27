@@ -30,12 +30,12 @@ int key(const int *array, const int *end_of_array, int **filtered_array, int **e
 
     int i;
     /* Поиск первого (с конца) отрицательного элемента массива */
-    for (i = 1; (end_of_array - i >= array) && (*(end_of_array - i) >= 0); i++);
+    for (i = 1; (end_of_array - i > array) && (*(end_of_array - i) >= 0); i++);
 
     /* Расчет размера отфильтрованного массива */
     int filtered_array_size = (int) (end_of_array - array);
     if (end_of_array - i >= array)
-        filtered_array_size -= i - 1;
+        filtered_array_size -= i;
 
     if (filtered_array_size > 0)
     {
