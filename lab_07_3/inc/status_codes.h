@@ -25,7 +25,8 @@ typedef enum
     error_wrong_value_in_file = -4,
     error_empty_input_file = -5,
     error_cannot_open_output_file = -6,
-    error_empty_filtration_output = -7
+    error_empty_filtration_output = -7,
+    error_out_of_memory = -8
 } status_code;
 
 #endif
