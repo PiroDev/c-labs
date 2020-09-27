@@ -28,29 +28,34 @@ int key(const int *array, const int *end_of_array, int **filtered_array, int **e
 {
     status_code result = ok;
 
-    int i;
-    /* Поиск первого (с конца) отрицательного элемента массива */
-    for (i = 1; (end_of_array - i >= array) && (*(end_of_array - i) >= 0); i++);
-
-    /* Расчет размера отфильтрованного массива */
-    int filtered_array_size = (int) (end_of_array - array);
-    if (end_of_array - i >= array)
-        filtered_array_size -= i;
-
-    if (filtered_array_size > 0)
+    if (array != end_of_array)
     {
-        /* Выделение памяти под отфильтрованный массив */
-        *filtered_array = (int *) malloc(filtered_array_size * sizeof(int));
-        if (*filtered_array != NULL)
-        {
-            *end_of_filtered_array = *filtered_array + filtered_array_size;
+        int i;
+        /* Поиск первого (с конца) отрицательного элемента массива */
+        for (i = 1; (end_of_array - i >= array) && (*(end_of_array - i) >= 0); i++);
 
-            /* Запись подходящих по фильтру элементов массива */
-            for (i = 0; i < filtered_array_size; i++)
-                *(*filtered_array + i) = *(array + i);
+        /* Расчет размера отфильтрованного массива */
+        int filtered_array_size = (int) (end_of_array - array);
+        if (end_of_array - i >= array)
+            filtered_array_size -= i;
+
+        if (filtered_array_size > 0)
+        {
+            /* Выделение памяти под отфильтрованный массив */
+            *filtered_array = (int *) malloc(filtered_array_size * sizeof(int));
+            if (*filtered_array != NULL)
+            {
+                *end_of_filtered_array = *filtered_array + filtered_array_size;
+
+                /* Запись подходящих по фильтру элементов массива */
+                for (i = 0; i < filtered_array_size; i++)
+                    *(*filtered_array + i) = *(array + i);
+            }
+            else
+                result = error_out_of_memory;
         }
         else
-            result = error_out_of_memory;
+            result = error_empty_filtration_output;
     }
     else
         result = error_empty_filtration_output;
