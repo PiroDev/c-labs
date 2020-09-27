@@ -15,6 +15,7 @@
  * \param error_empty_input_file - пустой входной файл
  * \param error_cannot_open_output_file - не получается создать (открыть на запись) выходной файл
  * \param error_empty_filtration_output - последовательность после фильтрации оказалась пустой
+ * \param error_out_of_memory - ошибка при выделении памяти
 */
 typedef enum
 {

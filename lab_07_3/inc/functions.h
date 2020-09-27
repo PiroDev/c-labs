@@ -37,4 +37,9 @@ void swap(void *, void *, size_t);
 */
 int is_even(int);
 
+/**
+ * \brief Функция проверки числа на четность
+*/
+void copy_array(const int *, int *, int);
+
 #endif
