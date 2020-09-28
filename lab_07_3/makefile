@@ -23,9 +23,11 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
 	mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-unit: $(OBJDIR)/functions.o $(OBJDIR)/check_functions.o $(OBJDIR)/check_main.o
-	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
+unit: unit_tests.exe
 	./unit_tests.exe
+
+unit_tests.exe: $(OBJDIR)/functions.o $(OBJDIR)/check_functions.o $(OBJDIR)/check_main.o
+	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
 
 $(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/test_suites.h
 	mkdir -p out;
