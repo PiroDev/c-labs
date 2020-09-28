@@ -38,7 +38,7 @@ void swap(void *, void *, size_t);
 int is_even(int);
 
 /**
- * \brief Функция проверки числа на четность
+ * \brief Функция копирования count первых элементов массива в другой массив
 */
 void copy_array(const int *, int *, int);
 
