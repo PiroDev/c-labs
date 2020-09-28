@@ -11,26 +11,31 @@ int main(void)
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
+    srunner_free(runner);
 
     equal_class = swap_suite(); /* swap */
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
+    srunner_free(runner);
 
     equal_class = cmp_int_suite(); /* cmp_int */
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
+    srunner_free(runner);
 
     equal_class = copy_array_suite(); /* copy_array */
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
+    srunner_free(runner);
 
     equal_class = key_suite(); /* key */
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
+    srunner_free(runner);
 
     equal_class = mysort_suite(); /* my_sort */
     runner = srunner_create(equal_class);
