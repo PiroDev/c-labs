@@ -5,6 +5,8 @@ OBJS := $(OBJDIR)/functions.o $(OBJDIR)/input_output.o
 SRCDIR := src
 INCDIR := inc
 RM := rm
+CHECKFLAGS := -lcheck -lpthread -lrt
+UNIT_TESTS_DIR := unit_tests
 
 ifeq ($(mode), debug)
 	CFLAGS += -g3
@@ -21,7 +23,15 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
 	mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+unit: $(OBJDIR)/functions.o $(OBJDIR)/check_functions.o $(OBJDIR)/check_main.o
+	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
+	./unit_tests.exe
+
+$(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/test_suites.h
+	mkdir -p out;
+	$(CC) $(CFLAGS) -c $< -o $@
+
 .PHONY : clean
 clean :
-	$(RM) *.exe
-	cd out;	$(RM) *.o
+	$(RM) -f *.exe
+	$(RM) -f out/*.o
