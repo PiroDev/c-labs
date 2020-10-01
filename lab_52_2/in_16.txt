@@ -1,0 +1,2 @@
+./main.exe at test_out.txt
+very long input string so there is an input error

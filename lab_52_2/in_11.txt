@@ -1,0 +1,11 @@
+./main.exe ft bad_in.txt milk
+
+bad_in.txt:
+milk
+bmk
+48
+2
+eggs
+32
+bmk
+2
