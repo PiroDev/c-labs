@@ -1,4 +1,4 @@
-#include "test_suites.h"
+#include "check_test_suites.h"
 #include <stdlib.h>
 
 int main(void)
