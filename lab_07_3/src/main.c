@@ -45,6 +45,7 @@ int main(int argc, char **argv)
                 result = key(array, end_of_array, &filtered_array, &end_of_filtered_array);
 
                 copy_array_pointers(&filtered_array, &end_of_filtered_array, &result_array, &end_of_result_array);
+                free_resources(&array, &end_of_array);
             }
             else
                 copy_array_pointers(&array, &end_of_array, &result_array, &end_of_result_array);
