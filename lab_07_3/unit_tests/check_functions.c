@@ -1,6 +1,6 @@
 #include "../inc/array_functions.h"
 #include "../inc/status_codes.h"
-#include "test_suites.h"
+#include "check_test_suites.h"
 
 /* is_even tests */
 START_TEST(test_is_even_even)

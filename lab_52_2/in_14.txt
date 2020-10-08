@@ -1,0 +1,4 @@
+./main.exe at test_in.txt
+eggs
+23
+bmk

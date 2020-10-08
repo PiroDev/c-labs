@@ -29,7 +29,7 @@ unit: unit_tests.exe
 unit_tests.exe: $(OBJDIR)/array_functions.o $(OBJDIR)/check_functions.o $(OBJDIR)/check_main.o
 	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
 
-$(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/test_suites.h
+$(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/check_test_suites.h
 	mkdir -p out;
 	$(CC) $(CFLAGS) -c $< -o $@
 

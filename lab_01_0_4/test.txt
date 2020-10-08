@@ -1,0 +1,11 @@
+in: 25
+out: 0
+
+in: 45
+out: 1
+
+in: 90
+out: 2
+
+in: 100
+out: 3
