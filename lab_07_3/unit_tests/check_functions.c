@@ -1,4 +1,4 @@
-#include "../inc/functions.h"
+#include "../inc/array_functions.h"
 #include "../inc/status_codes.h"
 #include "test_suites.h"
 

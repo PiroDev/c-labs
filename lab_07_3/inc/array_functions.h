@@ -42,4 +42,9 @@ int is_even(int);
 */
 void copy_array(const int *, int *, int);
 
+/**
+ * \brief Функция копирования адресов начала и конца массива
+*/
+void copy_array_pointers(int **, int **, int **, int **);
+
 #endif

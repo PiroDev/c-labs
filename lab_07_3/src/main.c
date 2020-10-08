@@ -3,7 +3,7 @@
  * \brief В этом файле находится точка входа в программу
 */
 #include "../inc/input_output.h"
-#include "../inc/functions.h"
+#include "../inc/array_functions.h"
 #include <string.h>
 
 /**
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
     status_code result = ok; /* код состояния */
 
-    if ((argc == 3) || (argc == 4))
+    if ((argc == 3) || ((argc == 4) && !strcmp(FILTRATION_MARKER, argv[3])))
     {
         /* Выделяем из аргументов командной строки названия входного и выходного файлов */
         char *input_fname = argv[1];
@@ -28,26 +28,15 @@ int main(int argc, char **argv)
         int *array = NULL;
         int *end_of_array = NULL;
 
-        /* Производим проверку на корректность введенных аргументов командной строки */
-        if (argc == 3)
-        {
-            /* Считываем числа из файла в массив */
-            result = input_from_text_file(input_fname, &array, &end_of_array);
-            if (!result)
-            {
-                /* Сортировка массива и вывод результата в файл */
-                mysort(array, (int) (end_of_array - array), sizeof(int), cmp_int);
-                result = output_in_text_file(output_fname, array, end_of_array);
-            }
+        /* Считываем числа из файла в массив */
+        result = input_from_text_file(input_fname, &array, &end_of_array);
 
-            /* Освобождение памяти и обнуление указателей */
-            free_resources(&array, &end_of_array);
-        }
-        else if (!strcmp(FILTRATION_MARKER, argv[3]))
+        if (!result)
         {
-            /* Считываем числа из файла в массив */
-            result = input_from_text_file(input_fname, &array, &end_of_array);
-            if (!result)
+            int *result_array = NULL;
+            int *end_of_result_array = NULL;
+
+            if (argc == 4)
             {
                 int *filtered_array = NULL;
                 int *end_of_filtered_array = NULL;
@@ -55,17 +44,20 @@ int main(int argc, char **argv)
                 /* Фильтруем исходный массив, результат копируем в filtered_array */
                 result = key(array, end_of_array, &filtered_array, &end_of_filtered_array);
 
-                if (!result)
-                {
-                    /* Сортировка отфильтрованного массива и вывод результата в файл */
-                    mysort(filtered_array, (int) (end_of_filtered_array - filtered_array), sizeof(int), cmp_int);
-                    result = output_in_text_file(output_fname, filtered_array, end_of_filtered_array);
-                }
-
-                /* Освобождение памяти и обнуление указателей */
-                free_resources(&array, &end_of_array);
-                free_resources(&filtered_array, &end_of_filtered_array);
+                copy_array_pointers(&filtered_array, &end_of_filtered_array, &result_array, &end_of_result_array);
             }
+            else
+                copy_array_pointers(&array, &end_of_array, &result_array, &end_of_result_array);
+
+            if (!result)
+            {
+                /* Сортировка массива и вывод результата в файл */
+                mysort(result_array, (int) (end_of_result_array - result_array), sizeof(int), cmp_int);
+                result = output_in_text_file(output_fname, result_array, end_of_result_array);
+            }
+
+            /* Освобождение памяти и обнуление указателей */
+            free_resources(&result_array, &end_of_result_array);
         }
         else
             result = error_wrong_command_line_args;

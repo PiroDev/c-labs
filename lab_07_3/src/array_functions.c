@@ -2,7 +2,7 @@
  * \file functions.c
  * \brief В этом файле находится реализация функций для работы с массивами и других полезные функции
 */
-#include "../inc/functions.h"
+#include "../inc/array_functions.h"
 #include <malloc.h>
 #include "../inc/status_codes.h"
 
@@ -89,4 +89,13 @@ void copy_array(const int *array_from, int *array_dest, int count)
 {
     for (int i = 0; i < count; i++)
         *(array_dest + i) = *(array_from + i);
+}
+
+void copy_array_pointers(int **old_array, int **end_of_old_array, int **new_array, int **end_of_new_array)
+{
+    *new_array = *old_array;
+    *end_of_new_array = *end_of_old_array;
+
+    *old_array = NULL;
+    *end_of_old_array = NULL;
 }
