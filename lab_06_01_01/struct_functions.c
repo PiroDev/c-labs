@@ -57,9 +57,9 @@ int binary_search(film_array films, int count_films, char *field, char *key, fil
     while ((start <= end) && !element_was_found)
     {
         i = (start + end) / 2;
-        if (compare_films_by_field(field, &films[i], &temp_film) > 0)
+        if (compare_films_by_field(field, films + i, &temp_film) > 0)
             end = i - 1;
-        else if (compare_films_by_field(field, &films[i], &temp_film) < 0)
+        else if (compare_films_by_field(field, films + i, &temp_film) < 0)
             start = i + 1;
         else
             element_was_found = 1;
