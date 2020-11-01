@@ -41,6 +41,8 @@ char **fname_matrix_2, char **fname_output)
             result = error_cannot_open_input_file;
         else
         {
+            if (fgetc(f) == EOF)
+                result = error_empty_input_file;
             fclose(f);
             f = 0;
         }
@@ -50,8 +52,12 @@ char **fname_matrix_2, char **fname_output)
             f = fopen(*fname_matrix_2, "r");
             if (!f)
                 result = error_cannot_open_input_file;
+            else if (feof(f))
+                result = error_empty_input_file;
             else
             {
+                if (fgetc(f) == EOF)
+                    result = error_empty_input_file;
                 fclose(f);
                 f = 0;
             }
