@@ -5,8 +5,7 @@
 #include "status_codes.h"
 #include "stdio.h"
 
-status_code parse_and_validate_args(int argc, char **argv, char *operation, char **fname_matrix_1,
-                                    char **fname_matrix_2, char **fname_output);
+status_code parse_and_validate_args(const int argc, char **argv, char *operation);
 
 status_code get_matrix_size_from_file(int *count_rows, int *count_columns, const char *fname);
 status_code read_matrix_double_from_file(matrix_double_t *matrix, const char *fname);

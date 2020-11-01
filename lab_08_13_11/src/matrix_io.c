@@ -1,29 +1,20 @@
 #include "matrix_io.h"
 
-status_code parse_and_validate_args(const int argc, char **argv, char *operation, char **fname_matrix_1,
-char **fname_matrix_2, char **fname_output)
+status_code parse_and_validate_args(const int argc, char **argv, char *operation)
 {
     status_code result = ok;
     if (argc >= 4 && argc <= 5)
     {
         *operation = argv[1][0];
-        *fname_matrix_1 = argv[2];
         switch (*operation)
         {
             case 'o':
-                if (argc == 4)
-                    *fname_output = argv[3];
-                else
+                if (argc != 4)
                     result = error_wrong_number_of_args;
                 break;
             case 'a':
             case 'm':
-                if (argc == 5)
-                {
-                    *fname_matrix_2 = argv[3];
-                    *fname_output = argv[4];
-                }
-                else
+                if (argc != 5)
                     result = error_wrong_number_of_args;
                 break;
             default:
@@ -34,44 +25,51 @@ char **fname_matrix_2, char **fname_output)
     else
         result = error_wrong_number_of_args;
 
+    /* проверки на корректность имен файлов */
     if (!result)
     {
-        FILE *f = fopen(*fname_matrix_1, "r");
-        if (!f)
-            result = error_cannot_open_input_file;
-        else
+        FILE *f = fopen(argv[2], "r");
+        if (f)
         {
-            if (fgetc(f) == EOF)
-                result = error_empty_input_file;
             fclose(f);
             f = 0;
         }
-
-        if (!result && *operation != 'o')
-        {
-            f = fopen(*fname_matrix_2, "r");
-            if (!f)
-                result = error_cannot_open_input_file;
-            else if (feof(f))
-                result = error_empty_input_file;
-            else
-            {
-                if (fgetc(f) == EOF)
-                    result = error_empty_input_file;
-                fclose(f);
-                f = 0;
-            }
-        }
-
+        else
+            result = error_cannot_open_input_file;
         if (!result)
         {
-            f = fopen(*fname_output, "w");
-            if (!f)
-                result = error_cannot_open_output_file;
+            if (*operation == 'o')
+            {
+                f = fopen(argv[3], "w");
+                if (f)
+                {
+                    fclose(f);
+                    f = 0;
+                }
+                else
+                    result = error_cannot_open_output_file;
+            }
             else
             {
-                fclose(f);
-                f = 0;
+                f = fopen(argv[3], "r");
+                if (f)
+                {
+                    fclose(f);
+                    f = 0;
+                }
+                else
+                    result = error_cannot_open_input_file;
+                if (!result)
+                {
+                        f = fopen(argv[4], "w");
+                    if (f)
+                    {
+                        fclose(f);
+                        f = 0;
+                    }
+                    else
+                        result = error_cannot_open_output_file;
+                }
             }
         }
     }
