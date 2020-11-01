@@ -57,13 +57,13 @@ int main(int argc, char **argv)
                     result = matrix_double_operation_add(matrix_1, matrix_2, matrix_1);
                     matrix_result = matrix_1;
                     break;
-                // case 'm':
-                //     matrix_result = alloc_matrix_double(matrix_1->count_rows, matrix_2->count_columns);
-                //     if (matrix_result)
-                //         result = matrix_double_operation_mult(matrix_1, matrix_2, matrix_result);
-                //     else
-                //         result = error_out_of_memory;
-                //     break;
+                case 'm':
+                    matrix_result = alloc_matrix_double(matrix_1->count_rows, matrix_2->count_columns);
+                    if (matrix_result)
+                        result = matrix_double_operation_mult(matrix_1, matrix_2, matrix_result);
+                    else
+                        result = error_out_of_memory;
+                    break;
                 // case 'o':
                 //     det = matrix_double_get_det(matrix_1, &result);
                 //     matrix_result = matrix_1;
