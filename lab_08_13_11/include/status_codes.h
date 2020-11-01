@@ -10,7 +10,7 @@ typedef enum
     error_wrong_value_in_file = 4,
     error_cannot_open_output_file = 5,
     error_out_of_memory = 6,
-    error_operation_wrong_matrix_sizes = 7
+    error_wrong_matrix_sizes = 7
 } status_code;
 
 #endif  // INCLUDE_STATUS_CODES_H_

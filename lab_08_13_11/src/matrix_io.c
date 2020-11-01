@@ -1,7 +1,7 @@
 #include "matrix_io.h"
 
 status_code parse_command_line_args(const int argc, char **argv, char *operation, char **fname_matrix_1,
-                                    char **fname_matrix_2, char **fname_output)
+char **fname_matrix_2, char **fname_output)
 {
     status_code result = ok;
     if (argc >= 4 && argc <= 5)
@@ -30,7 +30,6 @@ status_code parse_command_line_args(const int argc, char **argv, char *operation
                 result = error_wrong_command_line_args;
                 break;
         }
-        
     }
     else
         result = error_wrong_number_of_args;
