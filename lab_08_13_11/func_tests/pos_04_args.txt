@@ -1,0 +1,1 @@
+m func_tests/shared/matrix_1_04.txt func_tests/shared/matrix_2_04.txt func_tests/output/res_04.txt
