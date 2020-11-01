@@ -8,7 +8,6 @@ int main(int argc, char **argv)
 
     char operation = 0;
     result = parse_and_validate_args(argc, argv, &operation);
-    return -1;
     if (!result)
     {
         int count_rows_1 = 0;
@@ -21,6 +20,7 @@ int main(int argc, char **argv)
         result = get_matrix_size_from_file(&count_rows_1, &count_columns_1, argv[2]);
         if (!result && operation != 'o')
             result = get_matrix_size_from_file(&count_rows_2, &count_columns_2, argv[3]);
+        return -1;
 
         if (!result)
             result = validate_matrix_sizes(count_rows_1, count_columns_1, count_rows_2, count_columns_2, operation);
