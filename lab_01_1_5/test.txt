@@ -1,0 +1,11 @@
+in: 0 0
+out: Incorrect input!
+
+in: 1 2
+out: 0 1
+
+in: 3 3
+out: 1 0
+
+in: 13 4
+out: 3 1
