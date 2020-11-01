@@ -7,6 +7,7 @@ int main(int argc, char **argv)
     status_code result = ok;
 
     char operation = 0;
+    return -1;
     result = parse_and_validate_args(argc, argv, &operation);
     if (!result)
     {

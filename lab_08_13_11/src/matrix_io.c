@@ -61,7 +61,7 @@ status_code parse_and_validate_args(const int argc, char **argv, char *operation
                     result = error_cannot_open_input_file;
                 if (!result)
                 {
-                        f = fopen(argv[4], "w");
+                    f = fopen(argv[4], "w");
                     if (f)
                     {
                         fclose(f);
