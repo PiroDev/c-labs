@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
                 }
             }
         }
+        free_films_in_vector(&films);
     }
     return result;
 }

@@ -70,3 +70,11 @@ status_code push_back(film_vector_t *films, const film_t *film) {
 
     return result;
 }
+
+void free_films_in_vector(film_vector_t *films) {
+    for (int i = 0; i < films->count; i++) {
+        free_film_string_fields(films->data + i);
+    }
+    films->count = 0;
+}
+
