@@ -71,13 +71,14 @@ int main(int argc, char **argv)
                 default:
                     break;
             }
-            if (!result)
-            {
-                if (operation != 'o')
-                    result = write_matrix_double_to_file(matrix_result, fname_output);
-                else
-                    result = write_double_to_file(det, fname_output);
-            }
+            det += 1;
+            // if (!result)
+            // {
+            //     if (operation != 'o')
+            //         result = write_matrix_double_to_file(matrix_result, fname_output);
+            //     else
+            //         result = write_double_to_file(det, fname_output);
+            // }
         }
         free_matrix_double(&matrix_result);
         if (operation == 'm')
