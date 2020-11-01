@@ -107,7 +107,7 @@ status_code write_matrix_double_to_file(const matrix_double_t *matrix, const cha
     return result;
 }
 
-status_code write_double_to_file(const double value, const char *fname)
+status_code write_double_to_file(double value, const char *fname)
 {
     status_code result = ok;
     FILE *f = fopen(fname, "w");
@@ -120,5 +120,28 @@ status_code write_double_to_file(const double value, const char *fname)
     else
         result = error_cannot_open_output_file;
 
+    return result;
+}
+
+status_code validate_matrix_sizes(int rows_1, int cols_1, int rows_2, int cols_2, char operation)
+{
+    status_code result = ok;
+    switch (operation)
+    {
+        case 'a':
+            if (rows_1 != rows_2 || cols_1 != cols_2)
+                result = error_wrong_matrix_sizes;
+            break;
+        case 'm':
+            if (cols_1 != rows_2)
+                result = error_wrong_matrix_sizes;
+            break;
+        case 'o':
+            if (rows_1 != cols_1)
+                result = error_wrong_matrix_sizes;
+            break;
+        default:
+            break;
+    }
     return result;
 }

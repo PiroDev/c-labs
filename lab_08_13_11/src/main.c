@@ -13,15 +13,23 @@ int main(int argc, char **argv)
     result = parse_command_line_args(argc, argv, &operation, &fname_matrix_1, &fname_matrix_2, &fname_output);
     if (!result)
     {
-        int count_rows = 0;
-        int count_columns = 0;
+        int count_rows_1 = 0;
+        int count_columns_1 = 0;
+        int count_rows_2 = 0;
+        int count_columns_2 = 0;
         matrix_double_t * matrix_1 = 0;
         matrix_double_t * matrix_2 = 0;
-        result = get_matrix_size_from_file(&count_rows, &count_columns, fname_matrix_1);
+
+        result = get_matrix_size_from_file(&count_rows_1, &count_columns_1, fname_matrix_1);
+        if (!result && operation != 'o')
+            result = get_matrix_size_from_file(&count_rows_2, &count_columns_2, fname_matrix_2);
+
+        if (!result)
+            result = validate_matrix_sizes(count_rows_1, count_columns_1, count_rows_2, count_columns_2, operation);
 
         if (!result)
         {
-            matrix_1 = alloc_matrix_double(count_rows, count_columns);
+            matrix_1 = alloc_matrix_double(count_rows_1, count_columns_1);
             if (!matrix_1)
                 result = error_out_of_memory;
             else
@@ -29,10 +37,9 @@ int main(int argc, char **argv)
         }
         if (!result && fname_matrix_2)
         {
-            result = get_matrix_size_from_file(&count_rows, &count_columns, fname_matrix_2);
             if (!result)
             {
-                matrix_2 = alloc_matrix_double(count_rows, count_columns);
+                matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
                 if (!matrix_2)
                     result = error_out_of_memory;
                 else
