@@ -50,7 +50,7 @@ int main(int argc, char **argv)
         matrix_double_t * matrix_result = 0;
         if (!result)
         {
-            // double det = 0.0;
+            double det = 0.0;
             switch (operation)
             {
                 case 'a':
@@ -64,13 +64,14 @@ int main(int argc, char **argv)
                     else
                         result = error_out_of_memory;
                     break;
-                // case 'o':
-                //     det = matrix_double_get_det(matrix_1, &result);
-                //     matrix_result = matrix_1;
-                //     break;
+                case 'o':
+                    det = matrix_double_get_det(matrix_1, &result);
+                    matrix_result = matrix_1;
+                    break;
                 default:
                     break;
             }
+            det += 1;
             // if (!result)
             // {
             //     if (operation != 'o')
