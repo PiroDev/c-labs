@@ -1,0 +1,1 @@
+./main.exe ft ~ s
