@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     char *fname_matrix_1 = 0;
     char *fname_matrix_2 = 0;
     char *fname_output = 0;
-    result = parse_command_line_args(argc, argv, &operation, &fname_matrix_1, &fname_matrix_2, &fname_output);
+    result = parse_and_validate_args(argc, argv, &operation, &fname_matrix_1, &fname_matrix_2, &fname_output);
     if (!result)
     {
         int count_rows_1 = 0;
@@ -71,14 +71,13 @@ int main(int argc, char **argv)
                 default:
                     break;
             }
-            det += 1;
-            // if (!result)
-            // {
-            //     if (operation != 'o')
-            //         result = write_matrix_double_to_file(matrix_result, fname_output);
-            //     else
-            //         result = write_double_to_file(det, fname_output);
-            // }
+            if (!result)
+            {
+                if (operation != 'o')
+                    result = write_matrix_double_to_file(matrix_result, fname_output);
+                else
+                    result = write_double_to_file(det, fname_output);
+            }
         }
         free_matrix_double(&matrix_result);
         if (operation == 'm')

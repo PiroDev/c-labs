@@ -1,6 +1,6 @@
 #include "matrix_io.h"
 
-status_code parse_command_line_args(const int argc, char **argv, char *operation, char **fname_matrix_1,
+status_code parse_and_validate_args(const int argc, char **argv, char *operation, char **fname_matrix_1,
 char **fname_matrix_2, char **fname_output)
 {
     status_code result = ok;
@@ -33,6 +33,42 @@ char **fname_matrix_2, char **fname_output)
     }
     else
         result = error_wrong_number_of_args;
+
+    if (!result)
+    {
+        FILE *f = fopen(*fname_matrix_1, "r");
+        if (!f)
+            result = error_cannot_open_input_file;
+        else
+        {
+            fclose(f);
+            f = 0;
+        }
+
+        if (!result && *operation != 'o')
+        {
+            f = fopen(*fname_matrix_2, "r");
+            if (!f)
+                result = error_cannot_open_input_file;
+            else
+            {
+                fclose(f);
+                f = 0;
+            }
+        }
+
+        if (!result)
+        {
+            f = fopen(*fname_output, "w");
+            if (!f)
+                result = error_cannot_open_output_file;
+            else
+            {
+                fclose(f);
+                f = 0;
+            }
+        }
+    }
 
     return result;
 }
