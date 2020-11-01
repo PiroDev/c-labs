@@ -71,9 +71,9 @@ int main(int argc, char **argv)
                     result = write_double_to_file(det, argv[3]);
             }
         }
-        free_matrix_double(&matrix_result);
-        if (operation == 'm')
-            free_matrix_double(&matrix_1);
+        if (matrix_result != matrix_1)
+            free_matrix_double(&matrix_result);
+        free_matrix_double(&matrix_1);
         free_matrix_double(&matrix_2);
     }
 
