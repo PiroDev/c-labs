@@ -7,8 +7,8 @@ int main(int argc, char **argv)
     status_code result = ok;
 
     char operation = 0;
-    return -1;
     result = parse_and_validate_args(argc, argv, &operation);
+    return -1;
     if (!result)
     {
         int count_rows_1 = 0;
