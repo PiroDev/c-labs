@@ -50,7 +50,7 @@ int main(int argc, char **argv)
         matrix_double_t * matrix_result = 0;
         if (!result)
         {
-            double det = 0.0;
+            // double det = 0.0;
             switch (operation)
             {
                 case 'a':
