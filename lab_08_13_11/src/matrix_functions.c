@@ -92,7 +92,10 @@ double matrix_double_get_det(const matrix_double_t *matrix, status_code *error)
     double det = 0.0;
 
     if (matrix->count_columns != matrix->count_rows)
+    {
         *error = error_wrong_matrix_sizes;
+        return det;
+    }
     else if (matrix->count_columns == 1)
         return matrix->rows[0][0];
 
