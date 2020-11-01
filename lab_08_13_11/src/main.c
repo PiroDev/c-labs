@@ -30,7 +30,10 @@ int main(int argc, char **argv)
             if (!matrix_1)
                 result = error_out_of_memory;
             else
+            {
                 result = read_matrix_double_from_file(matrix_1, argv[2]);
+                free_matrix_double(&matrix_1);
+            }
         }
         return -1;
         if (!result && operation != 'o')
