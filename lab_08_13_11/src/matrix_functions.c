@@ -6,7 +6,7 @@
 
 matrix_double_t *alloc_matrix_double(int count_rows, int count_columns)
 {
-    matrix_double_t* matrix = (matrix_double_t *)malloc(sizeof(matrix_double_t));
+    matrix_double_t * matrix = (matrix_double_t *)malloc(sizeof(matrix_double_t));
     if (matrix)
     {
         matrix->count_rows = count_rows;
@@ -100,7 +100,7 @@ double matrix_double_get_det(const matrix_double_t *matrix, status_code *error)
     {
         for (int i = 0; i < matrix->count_rows; i++)
         {
-            matrix_double_t* minor = alloc_matrix_double(matrix->count_rows - 1, matrix->count_columns - 1);
+            matrix_double_t * minor = alloc_matrix_double(matrix->count_rows - 1, matrix->count_columns - 1);
             int current_row = 0;
             for (int row_index = 0; row_index < matrix->count_rows; row_index++)
             {

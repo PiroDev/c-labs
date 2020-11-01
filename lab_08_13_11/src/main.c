@@ -15,8 +15,8 @@ int main(int argc, char **argv)
     {
         int count_rows = 0;
         int count_columns = 0;
-        matrix_double_t* matrix_1 = 0;
-        matrix_double_t* matrix_2 = 0;
+        matrix_double_t * matrix_1 = 0;
+        matrix_double_t * matrix_2 = 0;
         result = get_matrix_size_from_file(&count_rows, &count_columns, fname_matrix_1);
 
         if (!result)
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
             }
         }
 
-        matrix_double_t* matrix_result = 0;
+        matrix_double_t * matrix_result = 0;
         if (!result)
         {
             double det = 0.0;

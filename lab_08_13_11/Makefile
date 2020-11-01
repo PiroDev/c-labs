@@ -3,7 +3,7 @@ OBJDIR := out
 OBJS := $(OBJDIR)/matrix_functions.o $(OBJDIR)/matrix_io.o
 SRCDIR := src
 INCDIR := include
-CFLAGS := -I${INCDIR} -std=c99 -Wall  -pedantic -Wextra
+CFLAGS := -I${INCDIR} -std=c99 -Wall -Werror -pedantic -Wextra
 RM := rm
 CHECKFLAGS := -lcheck -lpthread -lrt
 UNIT_TESTS_DIR := unit_tests
