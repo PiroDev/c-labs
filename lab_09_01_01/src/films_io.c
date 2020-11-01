@@ -27,7 +27,7 @@ status_code read_films_from_file(const char *fname, film_vector_t *films) {
     FILE *f = fopen(fname, "r");
     if (f != NULL) {
         while (!feof(f) && result == ok) {
-            film_t temp = { .year = 0, .surname = "", .title = "" };
+            film_t temp = { .year = 0, .surname = NULL, .title = NULL };
             result = read_film_from_file(f, &temp);
             if (result == ok) {
                 result = push_back(films, &temp);
