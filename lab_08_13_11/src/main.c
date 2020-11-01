@@ -30,25 +30,18 @@ int main(int argc, char **argv)
             if (!matrix_1)
                 result = error_out_of_memory;
             else
-            {
                 result = read_matrix_double_from_file(matrix_1, argv[2]);
-                free_matrix_double(&matrix_1);
-            }
         }
-        return -1;
         if (!result && operation != 'o')
         {
-            if (!result)
-            {
-                matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
-                if (!matrix_2)
-                    result = error_out_of_memory;
-                else
-                    result = read_matrix_double_from_file(matrix_2, argv[3]);
-            }
+            matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
+            if (!matrix_2)
+                result = error_out_of_memory;
+            else
+                result = read_matrix_double_from_file(matrix_2, argv[3]);
         }
 
-        matrix_double_t * matrix_result = 0;
+        matrix_double_t * matrix_result = matrix_1;
         if (!result)
         {
             double det = 0.0;
@@ -56,7 +49,6 @@ int main(int argc, char **argv)
             {
                 case 'a':
                     result = matrix_double_operation_add(matrix_1, matrix_2, matrix_1);
-                    matrix_result = matrix_1;
                     break;
                 case 'm':
                     matrix_result = alloc_matrix_double(matrix_1->count_rows, matrix_2->count_columns);
@@ -67,7 +59,6 @@ int main(int argc, char **argv)
                     break;
                 case 'o':
                     det = matrix_double_get_det(matrix_1, &result);
-                    matrix_result = matrix_1;
                     break;
                 default:
                     break;

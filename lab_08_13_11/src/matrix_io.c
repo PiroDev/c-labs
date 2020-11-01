@@ -25,55 +25,6 @@ status_code parse_and_validate_args(const int argc, char **argv, char *operation
     else
         result = error_wrong_number_of_args;
 
-    /* проверки на корректность имен файлов */
-    if (!result)
-    {
-        FILE *f = fopen(argv[2], "r");
-        if (f)
-        {
-            fclose(f);
-            f = 0;
-        }
-        else
-            result = error_cannot_open_input_file;
-        if (!result)
-        {
-            if (*operation == 'o')
-            {
-                f = fopen(argv[3], "w");
-                if (f)
-                {
-                    fclose(f);
-                    f = 0;
-                }
-                else
-                    result = error_cannot_open_output_file;
-            }
-            else
-            {
-                f = fopen(argv[3], "r");
-                if (f)
-                {
-                    fclose(f);
-                    f = 0;
-                }
-                else
-                    result = error_cannot_open_input_file;
-                if (!result)
-                {
-                    f = fopen(argv[4], "w");
-                    if (f)
-                    {
-                        fclose(f);
-                        f = 0;
-                    }
-                    else
-                        result = error_cannot_open_output_file;
-                }
-            }
-        }
-    }
-
     return result;
 }
 
