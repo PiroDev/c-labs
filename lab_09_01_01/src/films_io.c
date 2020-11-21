@@ -30,11 +30,11 @@ status_code read_films_from_file(const char *fname, film_vector_t *films)
     status_code result = ok;
 
     FILE *f = fopen(fname, "r");
-    if (f != 0)
+    if (f != NULL)
     {
         while (!feof(f) && result == ok)
         {
-            film_t temp = {.year = 0, .surname = 0, .title = 0};
+            film_t temp = { .year = 0, .surname = NULL, .title = NULL };
             result = read_film_from_file(f, &temp);
             if (result == ok)
                 result = push_back(films, &temp);
@@ -73,14 +73,14 @@ status_code read_film_from_file(FILE *f, film_t *film)
         else
         {
             free_film_string_fields(film);
-            film->surname = 0;
+            film->surname = NULL;
             result = out_of_memory;
         }
     }
     else
     {
         free_film_string_fields(film);
-        film->title = 0;
+        film->title = NULL;
         result = out_of_memory;
     }
     return result;

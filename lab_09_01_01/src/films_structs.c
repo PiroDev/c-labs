@@ -7,7 +7,7 @@
 
 film_t init_film(const char *field, const char *value)
 {
-    film_t film = {.title = 0, .surname = 0, .year = 0};
+    film_t film = { .title = NULL, .surname = NULL, .year = 0 };
     if (!strcmp(field, "title"))
         film.title = strdup(value);
     else if (!strcmp(field, "name"))
@@ -20,9 +20,9 @@ film_t init_film(const char *field, const char *value)
 void free_film_string_fields(film_t *film)
 {
     free(film->title);
-    film->title = 0;
+    film->title = NULL;
     free(film->surname);
-    film->surname = 0;
+    film->surname = NULL;
 }
 
 status_code copy_film(const film_t *from, film_t *to)
@@ -59,7 +59,7 @@ status_code push_back(film_vector_t *films, const film_t *film)
 
     if (films->count == films->size)
     {
-        film_t *new_data = calloc(films->size * VECTOR_SIZE_MULTIPLIER, sizeof(film_t));
+        film_t * new_data = calloc(films->size * VECTOR_SIZE_MULTIPLIER, sizeof(film_t));
         if (new_data)
         {
             memcpy(new_data, films->data, sizeof(film_t) * films->count);
@@ -81,6 +81,6 @@ void free_vector(film_vector_t *films)
         free_film_string_fields(films->data + i);
 
     free(films->data);
-    films->data = 0;
+    films->data = NULL;
     films->count = 0;
 }
