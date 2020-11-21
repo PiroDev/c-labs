@@ -1,7 +1,8 @@
 #ifndef INCLUDE_STATUS_CODES_H_
 #define INCLUDE_STATUS_CODES_H_
 
-typedef enum {
+typedef enum
+{
     ok = 0,
     wrong_arguments_count = 1,
     wrong_arguments_value = 2,

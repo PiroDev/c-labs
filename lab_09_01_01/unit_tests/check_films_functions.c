@@ -9,7 +9,8 @@
 
 #define EPS 1e-5
 
-START_TEST(test_compare_films_by_field_title_less) {
+START_TEST(test_compare_films_by_field_title_less)
+{
     film_t film_1 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     film_t film_2 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     int result = compare_films_by_field("title", &film_1, &film_2);
@@ -17,7 +18,8 @@ START_TEST(test_compare_films_by_field_title_less) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_title_greater) {
+START_TEST(test_compare_films_by_field_title_greater)
+{
     film_t film_1 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     film_t film_2 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     int result = compare_films_by_field("title", &film_1, &film_2);
@@ -25,7 +27,8 @@ START_TEST(test_compare_films_by_field_title_greater) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_title_equal) {
+START_TEST(test_compare_films_by_field_title_equal)
+{
     film_t film_1 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     film_t film_2 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     int result = compare_films_by_field("title", &film_1, &film_2);
@@ -33,7 +36,8 @@ START_TEST(test_compare_films_by_field_title_equal) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_surname_less) {
+START_TEST(test_compare_films_by_field_surname_less)
+{
     film_t film_1 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     film_t film_2 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     int result = compare_films_by_field("name", &film_1, &film_2);
@@ -41,7 +45,8 @@ START_TEST(test_compare_films_by_field_surname_less) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_surname_greater) {
+START_TEST(test_compare_films_by_field_surname_greater)
+{
     film_t film_1 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     film_t film_2 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     int result = compare_films_by_field("name", &film_1, &film_2);
@@ -49,7 +54,8 @@ START_TEST(test_compare_films_by_field_surname_greater) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_surname_equal) {
+START_TEST(test_compare_films_by_field_surname_equal)
+{
     film_t film_1 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     film_t film_2 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     int result = compare_films_by_field("name", &film_1, &film_2);
@@ -57,7 +63,8 @@ START_TEST(test_compare_films_by_field_surname_equal) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_year_less) {
+START_TEST(test_compare_films_by_field_year_less)
+{
     film_t film_1 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     film_t film_2 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     int result = compare_films_by_field("year", &film_1, &film_2);
@@ -65,7 +72,8 @@ START_TEST(test_compare_films_by_field_year_less) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_year_greater) {
+START_TEST(test_compare_films_by_field_year_greater)
+{
     film_t film_1 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     film_t film_2 = { .title = "Fight Club", .surname = "David Fincher", .year = 1999 };
     int result = compare_films_by_field("year", &film_1, &film_2);
@@ -73,7 +81,8 @@ START_TEST(test_compare_films_by_field_year_greater) {
 }
 END_TEST
 
-START_TEST(test_compare_films_by_field_year_equal) {
+START_TEST(test_compare_films_by_field_year_equal)
+{
     film_t film_1 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     film_t film_2 = { .title = "Inception", .surname = "Christopher Nolan", .year = 2010 };
     int result = compare_films_by_field("year", &film_1, &film_2);
@@ -81,7 +90,8 @@ START_TEST(test_compare_films_by_field_year_equal) {
 }
 END_TEST
 
-Suite *compare_films_by_field_suite(void) {
+Suite *compare_films_by_field_suite(void)
+{
     Suite *equal_class;
     TCase *tc_pos;
 
@@ -103,30 +113,32 @@ Suite *compare_films_by_field_suite(void) {
     return equal_class;
 }
 
-void film_set_fields(film_t *film, const char *title, const char *surname, int year) {
+void film_set_fields(film_t *film, const char *title, const char *surname, int year)
+{
     film->title = strdup(title);
     film->surname = strdup(surname);
     film->year = year;
 }
 
-int films_is_equal(const film_t *film_1, const film_t *film_2) {
+int films_is_equal(const film_t *film_1, const film_t *film_2)
+{
     int result = 1;
     if (strcmp(film_1->title, film_2->title) || strcmp(film_1->title, film_2->title) ||
-        film_1->year != film_2->year) {
+        film_1->year != film_2->year)
         result = 0;
-    }
     return result;
 }
 
-int film_vectors_is_equal(const film_vector_t *films_1, const film_vector_t *films_2) {
+int film_vectors_is_equal(const film_vector_t *films_1, const film_vector_t *films_2)
+{
     int result = 1;
-    for (int i = 0; i < films_1->count && result; i++) {
+    for (int i = 0; i < films_1->count && result; i++)
         result &= films_is_equal(films_1->data + i, films_2->data + i);
-    }
     return result;
 }
 
-START_TEST(test_sort_films_common) {
+START_TEST(test_sort_films_common)
+{
     film_vector_t films = { .count = 0, .size = 0, .data = NULL };
     film_t film;
     film_set_fields(&film, "The Shawshank Redemption", "Frank Darabont", 1994);
@@ -186,7 +198,8 @@ START_TEST(test_sort_films_common) {
 }
 END_TEST
 
-Suite *sort_films_suite(void) {
+Suite *sort_films_suite(void)
+{
     Suite *equal_class;
     TCase *tc_pos;
 
@@ -198,7 +211,8 @@ Suite *sort_films_suite(void) {
     return equal_class;
 }
 
-START_TEST(test_binary_search_common) {
+START_TEST(test_binary_search_common)
+{
     film_vector_t films = { .count = 0, .size = 0, .data = NULL };
     film_t film;
     film_set_fields(&film, "Fight Club", "David Fincher", 1999);
@@ -237,7 +251,8 @@ START_TEST(test_binary_search_common) {
 }
 END_TEST
 
-Suite *binary_search_suite(void) {
+Suite *binary_search_suite(void)
+{
     Suite *equal_class;
     TCase *tc_pos;
 

@@ -6,13 +6,15 @@
 #define VECTOR_INIT_SIZE 10
 #define VECTOR_SIZE_MULTIPLIER 2
 
-typedef struct {
+typedef struct
+{
     char *title;
     char *surname;
     int year;
 } film_t;
 
-typedef struct {
+typedef struct
+{
     film_t *data;
     int count;
     int size;

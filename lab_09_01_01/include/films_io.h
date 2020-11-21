@@ -16,5 +16,4 @@ void remove_newline_symbol_from_str(char *str);
 void print_array(const film_vector_t *films);
 void print_film(const film_t *);
 
-
 #endif  // INCLUDE_FILMS_IO_H_
