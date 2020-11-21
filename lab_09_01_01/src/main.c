@@ -6,7 +6,7 @@ int main(int argc, char **argv)
     result = validate_args(argc, argv);
     if (!result)
     {
-        film_vector_t films = { .count = 0, .size = 0, .data = NULL };
+        film_vector_t films = { .count = 0, .size = 0, .data = 0 };
 
         result = read_films_from_file(argv[1], &films); /* считывание структур в массив */
         if (!result)
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
                 print_array(&films); /* вывод отсортированного массива на экран */
             else
             {
-                film_t temp_film = { .title = NULL, .surname = NULL, .year = 0 };
+                film_t temp_film = { .title = 0, .surname = 0, .year = 0 };
                 /* бинарный поиск по ключу */
                 if (binary_search(&films, argv[2], argv[3], &temp_film))
                 {
