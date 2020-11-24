@@ -73,7 +73,7 @@ status_code read_matrix_double_from_file(matrix_double_t *matrix, const char *fn
     return result;
 }
 
-status_code allocate_and_read_matrixes(char operation, char **fnames, matrix_double_t *matrix_1, matrix_double_t *matrix_2)
+status_code allocate_and_read_matrixes(char operation, char **fnames, matrix_double_t **matrix_1, matrix_double_t **matrix_2)
 {
     status_code result = ok;
 
@@ -91,19 +91,19 @@ status_code allocate_and_read_matrixes(char operation, char **fnames, matrix_dou
 
     if (!result)
     {
-        matrix_1 = alloc_matrix_double(count_rows_1, count_columns_1);
-        if (!matrix_1)
+        *matrix_1 = alloc_matrix_double(count_rows_1, count_columns_1);
+        if (!(*matrix_1))
             result = error_out_of_memory;
         else
-            result = read_matrix_double_from_file(matrix_1, fnames[2]);
+            result = read_matrix_double_from_file(*matrix_1, fnames[2]);
     }
     if (!result && operation != 'o')
     {
-        matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
-        if (!matrix_2)
+        *matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
+        if (!(*matrix_2))
             result = error_out_of_memory;
         else
-            result = read_matrix_double_from_file(matrix_2, fnames[3]);
+            result = read_matrix_double_from_file(*matrix_2, fnames[3]);
     }
 
     return result;

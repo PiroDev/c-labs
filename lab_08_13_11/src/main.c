@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         matrix_double_t * matrix_1 = 0;
         matrix_double_t * matrix_2 = 0;
 
-        result = allocate_and_read_matrixes(operation, argv, matrix_1, matrix_2);
+        result = allocate_and_read_matrixes(operation, argv, &matrix_1, &matrix_2);
 
         matrix_double_t * matrix_result = matrix_1;
         if (!result)
