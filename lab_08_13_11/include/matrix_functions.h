@@ -4,9 +4,6 @@
 #include "matrix_types.h"
 #include "status_codes.h"
 
-matrix_double_t *alloc_matrix_double(int count_rows, int count_columns);
-void free_matrix_double(matrix_double_t **matrix);
-
 status_code matrix_double_operation_add(const matrix_double_t *matrix_1, const matrix_double_t *matrix_2,
                                         matrix_double_t *matrix_result);
 status_code matrix_double_operation_mult(const matrix_double_t *matrix_1, const matrix_double_t *matrix_2,

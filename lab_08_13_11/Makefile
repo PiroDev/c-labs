@@ -1,6 +1,6 @@
 CC := gcc
 OBJDIR := out
-OBJS := $(OBJDIR)/matrix_functions.o $(OBJDIR)/matrix_io.o
+OBJS := $(OBJDIR)/matrix_types.o $(OBJDIR)/matrix_functions.o $(OBJDIR)/matrix_io.o
 SRCDIR := src
 INCDIR := include
 CFLAGS := -I${INCDIR} -std=c99 -Wall -Werror -pedantic -Wextra
@@ -26,7 +26,7 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
 unit: unit_tests.exe
 	./unit_tests.exe
 
-unit_tests.exe: $(OBJDIR)/matrix_functions.o $(OBJDIR)/check_matrix_functions.o $(OBJDIR)/check_main.o
+unit_tests.exe: $(OBJDIR)/matrix_types.o $(OBJDIR)/matrix_functions.o $(OBJDIR)/check_matrix_functions.o $(OBJDIR)/check_main.o
 	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
 
 $(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/check_test_suites.h

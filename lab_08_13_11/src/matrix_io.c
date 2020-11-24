@@ -1,4 +1,5 @@
 #include "matrix_io.h"
+#include <stdio.h>
 
 status_code parse_and_validate_args(const int argc, char **argv, char *operation)
 {
@@ -68,6 +69,42 @@ status_code read_matrix_double_from_file(matrix_double_t *matrix, const char *fn
     }
     else
         result = error_cannot_open_input_file;
+
+    return result;
+}
+
+status_code allocate_and_read_matrixes(char operation, char **fnames, matrix_double_t *matrix_1, matrix_double_t *matrix_2)
+{
+    status_code result = ok;
+
+    int count_rows_1 = 0;
+    int count_columns_1 = 0;
+    int count_rows_2 = 0;
+    int count_columns_2 = 0;
+
+    result = get_matrix_size_from_file(&count_rows_1, &count_columns_1, fnames[2]);
+    if (!result && operation != 'o')
+        result = get_matrix_size_from_file(&count_rows_2, &count_columns_2, fnames[3]);
+
+    if (!result)
+        result = validate_matrix_sizes(count_rows_1, count_columns_1, count_rows_2, count_columns_2, operation);
+
+    if (!result)
+    {
+        matrix_1 = alloc_matrix_double(count_rows_1, count_columns_1);
+        if (!matrix_1)
+            result = error_out_of_memory;
+        else
+            result = read_matrix_double_from_file(matrix_1, fnames[2]);
+    }
+    if (!result && operation != 'o')
+    {
+        matrix_2 = alloc_matrix_double(count_rows_2, count_columns_2);
+        if (!matrix_2)
+            result = error_out_of_memory;
+        else
+            result = read_matrix_double_from_file(matrix_2, fnames[3]);
+    }
 
     return result;
 }
