@@ -1,0 +1,1 @@
+a func_tests/shared/bad.txt func_tests/shared/bad.txt func_tests/output/res_05.txt
