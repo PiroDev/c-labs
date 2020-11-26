@@ -1,0 +1,1 @@
+o func_tests/shared/matrix_1_06.txt func_tests/output/res_06.txt
