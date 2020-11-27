@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "list_functions.h"
+#include "../include/list_functions.h"
 
 void install_packages(const node_t *list_head)
 {

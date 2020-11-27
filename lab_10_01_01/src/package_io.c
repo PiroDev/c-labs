@@ -1,11 +1,11 @@
 #define _GNU_SOURCE
 
-#include "package_io.h"
+#include "../include/package_io.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "list_functions.h"
+#include "../include/list_functions.h"
 
 static void remove_newline_symbol_from_str(char *str)
 {
