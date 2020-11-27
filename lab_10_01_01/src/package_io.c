@@ -42,7 +42,7 @@ status_code_t read_packages_from_file(const char *fname, node_t **list_head)
     {
         while (!feof(f) && !result)
         {
-            package_t *package = new_package();
+            package_t * package = new_package();
             result = read_package(f, package);
             if (!result)
                 *list_head = push_front(*list_head, package);

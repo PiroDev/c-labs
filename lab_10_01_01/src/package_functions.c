@@ -1,4 +1,4 @@
-#include "package_functions.h"
+#include "../include/package_functions.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -9,7 +9,7 @@ void install_packages(const node_t *list_head)
 {
     while (list_head)
     {
-        package_t *package = (package_t *)list_head->data;
+        package_t * package = (package_t *)list_head->data;
         install_package(package);
         list_head = list_head->next;
     }

@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "check_test_suites.h"
-#include "list_functions.h"
+#include "../include/list_functions.h"
 
 #define EPS 1e-5
 
