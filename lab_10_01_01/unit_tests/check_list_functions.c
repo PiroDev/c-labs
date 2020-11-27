@@ -96,6 +96,7 @@ START_TEST(test_insert_null_head)
     ck_assert(is_list_equal(expected, result, sizeof(char *)));
     pop_front(&expected);
     pop_front(&result);
+    pop_front(&element);
 }
 END_TEST
 
@@ -250,6 +251,8 @@ START_TEST(test_sorted_insert_null_head)
     sorted_insert(NULL, element, cmp_strings);
 
     ck_assert(is_list_equal(expected, element, sizeof(char *)));
+    pop_front(&expected);
+    pop_front(&element);
 }
 END_TEST
 
@@ -262,6 +265,8 @@ START_TEST(test_sorted_insert_null_element)
     sorted_insert(&buf, NULL, cmp_strings);
 
     ck_assert(is_list_equal(expected, buf, sizeof(char *)));
+    pop_front(&expected);
+    pop_front(&buf);
 }
 END_TEST
 
