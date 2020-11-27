@@ -62,7 +62,7 @@ void sorted_insert(node_t **head, node_t *element, int (*comparator)(const void 
     if (head && element)
     {
         node_t * curr = *head;
-        while (curr && comparator(curr->data, element->data) > 0)
+        while (curr && comparator(element->data, curr->data) > 0)
             curr = curr->next;
         insert(head, element, curr);
     }

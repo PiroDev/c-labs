@@ -222,13 +222,13 @@ START_TEST(test_sorted_insert_common)
     char *data_first = "1";
     char *data_second = "2";
     node_t *expected = NULL;
-    expected = push_front(expected, data_first);
     expected = push_front(expected, data_second);
+    expected = push_front(expected, data_first);
     node_t *result = NULL;
-    result = push_front(result, data_first);
+    result = push_front(result, data_second);
 
     node_t *element = NULL;
-    element = push_front(element, data_second);
+    element = push_front(element, data_first);
 
     sorted_insert(&result, element, cmp_strings);
 
@@ -289,11 +289,11 @@ START_TEST(test_sort_common)
     char *data_first = "1";
     char *data_second = "2";
     node_t *expected = NULL;
-    expected = push_front(expected, data_first);
     expected = push_front(expected, data_second);
+    expected = push_front(expected, data_first);
     node_t *result = NULL;
-    result = push_front(result, data_second);
     result = push_front(result, data_first);
+    result = push_front(result, data_second);
 
     result = sort(result, cmp_strings);
     ck_assert(is_list_equal(expected, result, sizeof(char *)));
@@ -309,7 +309,6 @@ Suite *sort_suite(void)
 {
     Suite *equal_class;
     TCase *tc_pos;
-    TCase *tc_neg;
 
     equal_class = suite_create("sort");
     tc_pos = tcase_create("positives");

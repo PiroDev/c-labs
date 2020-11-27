@@ -22,8 +22,8 @@ void install_package(const package_t *package)
 
 int package_comparator(const void *package_first, const void *package_second)
 {
-    int result = strcmp(((package_t *)package_second)->name, ((package_t *)package_first)->name);
+    int result = strcmp(((package_t *)package_first)->name, ((package_t *)package_second)->name);
     if (!result)
-        result = ((package_t *)package_first)->version - ((package_t *)package_second)->version;
+        result = ((package_t *)package_second)->version - ((package_t *)package_first)->version;
     return result;
 }
