@@ -4,7 +4,7 @@
 
 package_t *new_package(void)
 {
-    package_t* package = malloc(sizeof(package_t));
+    package_t *package = malloc(sizeof(package_t));
     if (package)
     {
         package->name = NULL;
