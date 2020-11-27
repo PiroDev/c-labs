@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     result = validate_args(argc, argv);
     if (!result)
     {
-        node_t * list_head = NULL;
+        node_t* list_head = NULL;
         result = read_packages_from_file(argv[2], &list_head);
         if (!result)
         {
