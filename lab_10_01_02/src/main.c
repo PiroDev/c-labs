@@ -32,12 +32,10 @@ int main(void)
                     print_polynom_value(value);
                 }
                 break;
-
             case dif_by_x:
                 result_polynom = get_polynom_dif_by_x(source_polynom);
                 source_polynom = NULL;
                 break;
-
             case sum:
                 result = read_polynom(&result_polynom);
                 if (!result)
@@ -48,23 +46,21 @@ int main(void)
                     result_polynom = temp;
                 }
                 break;
-
             case divide:
                 result = divide_polynom(source_polynom, &even_polynom, &odd_polynom);
                 if (!result)
                 {
-                    print_polynom(even_polynom);
+                    result = print_polynom(even_polynom);
                     delete_polynom(even_polynom);
                     result_polynom = odd_polynom;
                 }
                 break;
-
             default:
                 break;
         }
 
         if (!result && result_polynom)
-            print_polynom(result_polynom);
+            result = print_polynom(result_polynom);
 
         delete_polynom(result_polynom);
     }

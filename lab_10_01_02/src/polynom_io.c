@@ -79,15 +79,24 @@ void print_polynom_value(int value)
     printf("%d\n", value);
 }
 
-void print_polynom(node_t *polynom)
+status_code_t print_polynom(node_t *polynom)
 {
+    status_code_t result = 0;
+
+    int count = 0;
     while (polynom)
     {
         ratio_t *ratio = (ratio_t *)polynom->data;
         if (ratio->power >= 0)
             printf("%d %d ", ratio->mult, ratio->power);
         polynom = polynom->next;
+        count++;
     }
-    printf("L\n");
+    if (count)
+        printf("L\n");
+    else
+        result = error_empty_result;
+
+    return result;
 }
 

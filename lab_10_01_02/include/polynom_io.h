@@ -18,6 +18,6 @@ status_code_t read_command(command_t *command);
 status_code_t read_polynom(node_t **polynom);
 status_code_t read_polynom_point(int *polynom_point);
 void print_polynom_value(int value);
-void print_polynom(node_t *polynom);
+status_code_t print_polynom(node_t *polynom);
 
 #endif  // POLYNOM_IO_H_
