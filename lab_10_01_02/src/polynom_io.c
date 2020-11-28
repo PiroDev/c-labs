@@ -34,7 +34,7 @@ status_code_t read_polynom(node_t **polynom)
     char c = 0;
     while (!result && scanf("%d %d%c", &mult, &power, &c) == 3)
     {
-        if (mult != 0 || power >= 0 || (c != ' ' && c != '\n' && c != EOF))
+        if (mult == 0 || power < 0 || (c != ' ' && c != '\n' && c != EOF))
             result = error_wrong_input;
         else
         {
