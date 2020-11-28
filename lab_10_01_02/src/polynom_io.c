@@ -32,24 +32,29 @@ status_code_t read_polynom(node_t **polynom)
     int mult = 0;
     int power = 0;
     char c = 0;
-    while (!result && scanf("%d %d%c", &mult, &power, &c) == 3 && mult != 0 && power >= 0)
+    while (!result && scanf("%d %d%c", &mult, &power, &c) == 3)
     {
-        ratio_t *ratio = new_ratio(power, mult);
-        if (ratio)
-        {
-            node_t *temp = *polynom;
-            *polynom = push_front(*polynom, ratio);
-            if (!(*polynom))
-            {
-                result = error_out_of_memory;
-                delete_polynom(temp);
-                *polynom = NULL;
-            }
-        }
+        if (mult != 0 || power >= 0 || (c != ' ' && c != '\n' && c != EOF))
+            result = error_wrong_input;
         else
         {
-            result = error_out_of_memory;
-            delete_polynom(*polynom);
+            ratio_t *ratio = new_ratio(power, mult);
+            if (ratio)
+            {
+                node_t *temp = *polynom;
+                *polynom = push_front(*polynom, ratio);
+                if (!(*polynom))
+                {
+                    result = error_out_of_memory;
+                    delete_polynom(temp);
+                    *polynom = NULL;
+                }
+            }
+            else
+            {
+                result = error_out_of_memory;
+                delete_polynom(*polynom);
+            }
         }
         if (c == '\n' || c == EOF)
             break;
