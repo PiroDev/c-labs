@@ -34,27 +34,22 @@ status_code_t read_polynom(node_t **polynom)
     char c = 0;
     while (!result && scanf("%d %d%c", &mult, &power, &c) == 3)
     {
-        if (mult == 0 || power < 0 || (c != ' ' && c != '\n' && c != EOF))
-            result = error_wrong_input;
-        else
+        ratio_t *ratio = new_ratio(power, mult);
+        if (ratio)
         {
-            ratio_t *ratio = new_ratio(power, mult);
-            if (ratio)
-            {
-                node_t *temp = *polynom;
-                *polynom = push_front(*polynom, ratio);
-                if (!(*polynom))
-                {
-                    result = error_out_of_memory;
-                    delete_polynom(temp);
-                    *polynom = NULL;
-                }
-            }
-            else
+            node_t *temp = *polynom;
+            *polynom = push_front(*polynom, ratio);
+            if (!(*polynom))
             {
                 result = error_out_of_memory;
-                delete_polynom(*polynom);
+                delete_polynom(temp);
+                *polynom = NULL;
             }
+        }
+        else
+        {
+            result = error_out_of_memory;
+            delete_polynom(*polynom);
         }
         if (c == '\n' || c == EOF)
             break;
@@ -84,26 +79,15 @@ void print_polynom_value(int value)
     printf("%d\n", value);
 }
 
-status_code_t print_polynom(node_t *polynom)
+void print_polynom(node_t *polynom)
 {
-    status_code_t result = 0;
-
-    int count = 0;
     while (polynom)
     {
         ratio_t *ratio = (ratio_t *)polynom->data;
         if (ratio->power >= 0)
-        {
             printf("%d %d ", ratio->mult, ratio->power);
-            count++;
-        }
         polynom = polynom->next;
     }
-    if (count)
-        printf("L\n");
-    else
-        result = error_empty_result;
-
-    return result;
+    printf("L\n");
 }
 

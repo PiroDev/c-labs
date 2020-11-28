@@ -50,7 +50,7 @@ int main(void)
                 result = divide_polynom(source_polynom, &even_polynom, &odd_polynom);
                 if (!result)
                 {
-                    result = print_polynom(even_polynom);
+                    print_polynom(even_polynom);
                     delete_polynom(even_polynom);
                     result_polynom = odd_polynom;
                 }
@@ -60,7 +60,7 @@ int main(void)
         }
 
         if (!result && result_polynom)
-            result = print_polynom(result_polynom);
+            print_polynom(result_polynom);
 
         delete_polynom(result_polynom);
     }
