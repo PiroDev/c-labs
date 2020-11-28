@@ -88,9 +88,11 @@ status_code_t print_polynom(node_t *polynom)
     {
         ratio_t *ratio = (ratio_t *)polynom->data;
         if (ratio->power >= 0)
+        {
             printf("%d %d ", ratio->mult, ratio->power);
+            count++;
+        }
         polynom = polynom->next;
-        count++;
     }
     if (count)
         printf("L\n");
