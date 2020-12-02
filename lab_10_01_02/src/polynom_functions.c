@@ -82,12 +82,16 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
         }
 
         node_t * temp = sum;
-        sum = push_new_ratio(sum, result_power, result_mult);
-        if (!sum)
+        if (result_mult != 0)
         {
-            result = error_out_of_memory;
-            delete_polynom(temp);
-            sum = NULL;
+            sum = push_new_ratio(sum, result_power, result_mult);
+
+            if (!sum)
+            {
+                result = error_out_of_memory;
+                delete_polynom(temp);
+                sum = NULL;
+            }
         }
     }
 
@@ -110,6 +114,9 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
         remain = remain->next;
     }
     *result_polynom = reverse(sum);
+
+    if (!(*result_polynom))
+        result = error_empty_result;
 
     return result;
 }
