@@ -92,12 +92,6 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
                 delete_polynom(temp);
             }
         }
-        else
-        {
-            *result_polynom = NULL;
-            delete_polynom(sum);
-            return error_empty_result;
-        }
     }
 
     node_t * remain = NULL;

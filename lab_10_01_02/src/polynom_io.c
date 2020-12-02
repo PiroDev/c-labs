@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 status_code_t read_command(command_t *command)
 {
@@ -31,26 +32,34 @@ status_code_t read_polynom(node_t **polynom)
 
     int mult = 0;
     int power = 0;
+    int prev_power = INT_MAX;
     char c = 0;
     while (!result && scanf("%d %d%c", &mult, &power, &c) == 3)
     {
-        ratio_t *ratio = new_ratio(power, mult);
-        if (ratio)
+        if (prev_power > power)
         {
-            node_t *temp = *polynom;
-            *polynom = push_front(*polynom, ratio);
-            if (!(*polynom))
+            prev_power = power;
+            ratio_t *ratio = new_ratio(power, mult);
+            if (ratio)
+            {
+                node_t *temp = *polynom;
+                *polynom = push_front(*polynom, ratio);
+                if (!(*polynom))
+                {
+                    result = error_out_of_memory;
+                    delete_polynom(temp);
+                    *polynom = NULL;
+                }
+            }
+            else
             {
                 result = error_out_of_memory;
-                delete_polynom(temp);
-                *polynom = NULL;
+                delete_polynom(*polynom);
             }
         }
         else
-        {
-            result = error_out_of_memory;
-            delete_polynom(*polynom);
-        }
+            result = error_wrong_input;
+
         if (c == '\n' || c == EOF)
             break;
     }
