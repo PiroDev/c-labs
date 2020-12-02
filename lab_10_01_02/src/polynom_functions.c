@@ -66,19 +66,11 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
             first_polynom = first_polynom->next;
             second_polynom = second_polynom->next;
         }
-        else if (first_ratio->power > second_ratio->power)
-        {
-            result_power = first_ratio->power;
-            result_mult = first_ratio->mult;
-
-            first_polynom = first_polynom->next;
-        }
         else
         {
-            result_power = second_ratio->power;
-            result_mult = second_ratio->mult;
-
-            second_polynom = second_polynom->next;
+            delete_polynom(sum);
+            *result_polynom = NULL;
+            return error_empty_result;
         }
 
         node_t * temp = sum;
@@ -90,7 +82,6 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
             {
                 result = error_out_of_memory;
                 delete_polynom(temp);
-                sum = NULL;
             }
         }
     }
@@ -113,7 +104,6 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
             {
                 result = error_out_of_memory;
                 delete_polynom(temp);
-                sum = NULL;
             }
         }
         remain = remain->next;
@@ -141,7 +131,6 @@ status_code_t divide_polynom(node_t *source_polynom, node_t **even_polynom, node
             {
                 result = error_out_of_memory;
                 delete_polynom(temp);
-                *even_polynom = NULL;
             }
         }
         else
@@ -152,7 +141,6 @@ status_code_t divide_polynom(node_t *source_polynom, node_t **even_polynom, node
             {
                 result = error_out_of_memory;
                 delete_polynom(temp);
-                *odd_polynom = NULL;
             }
         }
         source_polynom = source_polynom->next;
