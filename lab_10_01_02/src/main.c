@@ -37,14 +37,15 @@ int main(void)
                 source_polynom = NULL;
                 break;
             case sum:
-                result = read_polynom(&result_polynom);
-                if (!result)
-                {
-                    node_t *temp = NULL;
-                    result = get_polynom_sum(source_polynom, result_polynom, &temp);
-                    delete_polynom(result_polynom);
-                    result_polynom = temp;
-                }
+                result = error_empty_result;
+                // result = read_polynom(&result_polynom);
+                // if (!result)
+                // {
+                //     node_t *temp = NULL;
+                //     result = get_polynom_sum(source_polynom, result_polynom, &temp);
+                //     delete_polynom(result_polynom);
+                //     result_polynom = temp;
+                // }
                 break;
             case divide:
                 result = divide_polynom(source_polynom, &even_polynom, &odd_polynom);
