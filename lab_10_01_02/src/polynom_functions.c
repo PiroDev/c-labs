@@ -149,5 +149,12 @@ status_code_t divide_polynom(node_t *source_polynom, node_t **even_polynom, node
     *even_polynom = reverse(*even_polynom);
     *odd_polynom = reverse(*odd_polynom);
 
+    if (!(*even_polynom) || !(*odd_polynom))
+    {
+        result = error_empty_result;
+        delete_polynom(*even_polynom);
+        delete_polynom(*odd_polynom);
+    }
+
     return result;
 }
