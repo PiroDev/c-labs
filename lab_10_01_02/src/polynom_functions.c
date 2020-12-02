@@ -103,13 +103,18 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
 
     while (remain)
     {
-        node_t * temp = sum;
-        sum = push_new_ratio(sum, ((ratio_t *)remain->data)->power, ((ratio_t *)remain->data)->mult);
-        if (!sum)
+        int power = ((ratio_t *)remain->data)->power;
+        int mult = ((ratio_t *)remain->data)->mult;
+        if (mult != 0)
         {
-            result = error_out_of_memory;
-            delete_polynom(temp);
-            sum = NULL;
+            node_t * temp = sum;
+            sum = push_new_ratio(sum, power, mult);
+            if (!sum)
+            {
+                result = error_out_of_memory;
+                delete_polynom(temp);
+                sum = NULL;
+            }
         }
         remain = remain->next;
     }
