@@ -46,6 +46,35 @@ node_t *get_polynom_dif_by_x(node_t *source_polynom)
     return result_polynom;
 }
 
+void get_curr_ratio_sum_and_iter(node_t **first_polynom, node_t **second_polynom, ratio_t *sum)
+{
+    ratio_t * first_ratio = (ratio_t *)(*first_polynom)->data;
+    ratio_t * second_ratio = (ratio_t *)(*second_polynom)->data;
+    if (first_ratio->power == second_ratio->power)
+    {
+        sum->power = first_ratio->power;
+        sum->mult = first_ratio->mult + second_ratio->mult;
+
+        *first_polynom = (*first_polynom)->next;
+        *second_polynom = (*second_polynom)->next;
+    }
+    else if (first_ratio->power > second_ratio->power)
+    {
+        sum->power = first_ratio->power;
+        sum->mult = first_ratio->mult;
+
+        *first_polynom = (*first_polynom)->next;
+    }
+    else
+    {
+        sum->power = second_ratio->power;
+        sum->mult = second_ratio->mult;
+
+        *second_polynom = (*second_polynom)->next;
+    }
+
+}
+
 status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, node_t **result_polynom)
 {
     status_code_t result = ok;
@@ -53,38 +82,13 @@ status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, nod
 
     while (!result && first_polynom && second_polynom)
     {
-        ratio_t * first_ratio = (ratio_t *)first_polynom->data;
-        ratio_t * second_ratio = (ratio_t *)second_polynom->data;
-        int result_power = 0;
-        int result_mult = 0;
-
-        if (first_ratio->power == second_ratio->power)
-        {
-            result_power = first_ratio->power;
-            result_mult = first_ratio->mult + second_ratio->mult;
-
-            first_polynom = first_polynom->next;
-            second_polynom = second_polynom->next;
-        }
-        else if (first_ratio->power > second_ratio->power)
-        {
-            result_power = first_ratio->power;
-            result_mult = first_ratio->mult;
-
-            first_polynom = first_polynom->next;
-        }
-        else
-        {
-            result_power = second_ratio->power;
-            result_mult = second_ratio->mult;
-
-            second_polynom = second_polynom->next;
-        }
+        ratio_t current_ratio = { .mult = 0, .power = 0 };
+        get_curr_ratio_sum_and_iter(&first_polynom, &second_polynom, &current_ratio);
 
         node_t * temp = sum;
-        if (result_mult != 0)
+        if (current_ratio.mult != 0)
         {
-            sum = push_new_ratio(sum, result_power, result_mult);
+            sum = push_new_ratio(sum, current_ratio.power, current_ratio.mult);
 
             if (!sum)
             {
