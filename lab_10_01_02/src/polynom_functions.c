@@ -72,7 +72,6 @@ void get_curr_ratio_sum_and_iter(node_t **first_polynom, node_t **second_polynom
 
         *second_polynom = (*second_polynom)->next;
     }
-
 }
 
 status_code_t get_polynom_sum(node_t *first_polynom, node_t *second_polynom, node_t **result_polynom)
