@@ -7,7 +7,7 @@
 
 #include "../include/list_functions.h"
 
-static void remove_newline_symbol_from_str(char *str)
+void remove_newline_symbol_from_str(char *str)
 {
     if (str[strlen(str) - 1] == '\n')
         str[strlen(str) - 1] = '\0';
