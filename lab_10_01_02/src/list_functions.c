@@ -55,32 +55,3 @@ node_t *reverse(node_t *head)
         new_head = push_front(new_head, pop_front(&head));
     return new_head;
 }
-
-void sorted_insert(node_t **head, node_t *element, int (*comparator)(const void *, const void *))
-{
-    if (head && element)
-    {
-        node_t *curr = *head;
-        while (curr && comparator(element->data, curr->data) > 0)
-            curr = curr->next;
-        insert(head, element, curr);
-    }
-}
-
-node_t *sort(node_t *head, int (*comparator)(const void *, const void *))
-{
-    node_t *sorted_list_head = NULL;
-    if (head)
-    {
-        node_t *curr = head;
-        node_t *next = curr->next;
-        while (curr)
-        {
-            sorted_insert(&sorted_list_head, curr, comparator);
-            curr = next;
-            if (curr)
-                next = next->next;
-        }
-    }
-    return sorted_list_head;
-}
