@@ -38,7 +38,7 @@ int main(void)
     tests_passed = srunner_ntests_failed(runner);
     srunner_free(runner);
 
-    equal_class = get_polynom_dif_by_x_suite();
+    equal_class = get_polynom_sum_suite();
     runner = srunner_create(equal_class);
     srunner_run_all(runner, CK_VERBOSE);
     tests_passed = srunner_ntests_failed(runner);
