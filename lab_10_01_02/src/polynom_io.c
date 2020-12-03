@@ -61,6 +61,7 @@ status_code_t read_polynom(node_t **polynom)
     {
         result = error_wrong_input;
         delete_polynom(*polynom);
+        *polynom = NULL;
     }
     else
         *polynom = reverse(*polynom);
