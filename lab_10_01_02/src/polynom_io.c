@@ -32,7 +32,8 @@ status_code_t read_polynom(node_t **polynom)
     int mult = 0;
     int power = 0;
     char c = 0;
-    while (!result && scanf("%d %d%c", &mult, &power, &c) == 3)
+    int rc = 0;
+    while (!result && (rc = scanf("%d %d%c", &mult, &power, &c)) == 3)
     {
         ratio_t *ratio = new_ratio(power, mult);
         if (ratio)
@@ -56,7 +57,7 @@ status_code_t read_polynom(node_t **polynom)
             break;
     }
 
-    if (!c)
+    if (rc != 3)
     {
         result = error_wrong_input;
         delete_polynom(*polynom);
