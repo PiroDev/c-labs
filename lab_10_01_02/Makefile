@@ -23,6 +23,16 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCDIR)/*.h
 	mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+unit: unit_tests.exe
+	./unit_tests.exe
+
+unit_tests.exe: $(OBJDIR)/list.o $(OBJDIR)/list_functions.o $(OBJDIR)/polynom.o $(OBJDIR)/polynom_functions.o $(OBJDIR)/check_polynom_functions.o $(OBJDIR)/check_main.o
+	$(CC) -o unit_tests.exe $^ $(CHECKFLAGS)
+
+$(OBJDIR)/check_%.o : $(UNIT_TESTS_DIR)/check_%.c $(UNIT_TESTS_DIR)/check_test_suites.h
+	mkdir -p out;
+	$(CC) $(CFLAGS) -c $< -o $@
+
 .PHONY : clean
 clean :
 	$(RM) -f *.exe
