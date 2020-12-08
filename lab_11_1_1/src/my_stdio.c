@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <stdarg.h>
 
-#define MAX_OCT_LEN ((sizeof(long unsigned int) * 8 / 3) + 1)
+#define MAX_OCT_LEN 100
 
 int string_len(const char *str)
 {
