@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <stdarg.h>
 
-#define MAX_OCT_LEN ((sizeof(long int) * 8 / 3) + 1)
+#define MAX_OCT_LEN ((sizeof(long unsigned int) * 8 / 3) + 1)
 
 int string_len(const char *str)
 {
@@ -49,21 +49,25 @@ void swap(char *first_symbol, char *second_symbol)
 int oct(unsigned long int number, char *oct_str)
 {
     int len = 0;
-    char *src = oct_str;
 
-    do
+    if (oct_str)
     {
-        *oct_str++ = (number % 8) + '0';
-        len++;
-    } while (number /= 8);
-    oct_str--;
+        char *src = oct_str;
 
-
-    while (src < oct_str)
-    {
-        swap(src, oct_str);
-        src++;
+        do
+        {
+            *oct_str++ = (number % 8) + '0';
+            len++;
+        } while (number /= 8);
         oct_str--;
+
+
+        while (src < oct_str)
+        {
+            swap(src, oct_str);
+            src++;
+            oct_str--;
+        }
     }
 
     return len;
