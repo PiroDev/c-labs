@@ -102,7 +102,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                     oct((unsigned int) va_arg(argptr, unsigned int), temp);
                     if (buf)
                         copy_to_string(temp, buf + result_len);
-                    result_len += string_len(temp) - 1;
+                    result_len += string_len(temp);
                     break;
                 case 'l':
                     format++;
@@ -111,16 +111,16 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                         oct((long unsigned int) va_arg(argptr, long unsigned int), temp);
                         if (buf)
                             copy_to_string(temp, buf + result_len);
-                        result_len += string_len(temp) - 1;
+                        result_len += string_len(temp);
                     }
                     else
                         result_len = -1;
                     break;
                 case 's':
                     if (buf)
-                        result_len += (copy_to_string((char *) va_arg(argptr, char *), buf + result_len) - 1);
+                        result_len += copy_to_string((char *) va_arg(argptr, char *), buf + result_len);
                     else
-                        result_len += string_len((char *) va_arg(argptr, char *)) - 1;
+                        result_len += string_len((char *) va_arg(argptr, char *));
                     break;
                 default:
                     result_len = -1;
@@ -130,9 +130,12 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
         else
             curr_symbol = *format;
 
-        if (buf && curr_symbol)
-            buf[result_len] = curr_symbol;
-        result_len++;
+        if (curr_symbol)
+        {
+            if (buf)
+                buf[result_len] = curr_symbol;
+            result_len++;
+        }
         format++;
     }
 
