@@ -93,7 +93,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                     *buf = '%';
                     break;
                 case 'c':
-                    *buf = (char) va_arg(argptr, int);
+                    *buf = (unsigned char) va_arg(argptr, int);
                     break;
                 case 'o':
                     oct((unsigned int) va_arg(argptr, unsigned int), temp);
