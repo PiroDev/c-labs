@@ -90,16 +90,13 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                 case '%':
                     *buf = '%';
                     break;
-
                 case 'c':
                     *buf = (char) va_arg(argptr, int);
                     break;
-
                 case 'o':
-                        oct((unsigned int) va_arg(argptr, unsigned int), temp);
-                        buf += (copy_to_string(temp, buf) - 1);
+                    oct((unsigned int) va_arg(argptr, unsigned int), temp);
+                    buf += (copy_to_string(temp, buf) - 1);
                     break;
-
                 case 'l':
                     format++;
                     if (*format == 'o')
@@ -112,11 +109,9 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                         result = -1;
                     }
                     break;
-
                 case 's':
                     buf += (copy_to_string((char *) va_arg(argptr, char *), buf) - 1);
                     break;
-
                 default:
                     result = -1;
                     break;
