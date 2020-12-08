@@ -71,18 +71,17 @@ int oct(unsigned long int number, char *oct_str)
 
 int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
 {
-    int result = 0;
+    int result_len = 0;
 
     if (buf_size > INT_MAX || buf_size < 0 || !format)
-        result = -1;
+        result_len = -1;
 
     va_list argptr;
     va_start(argptr, format);
 
-    char *src = buf;
-
-    while (result != -1 && *format)
+    while (result_len != -1 && *format)
     {
+        char curr_symbol = '\0';
         if (*format == '%')
         {
             char temp[MAX_OCT_LEN] = { '\0' };
@@ -90,50 +89,58 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
             switch (*format)
             {
                 case '%':
-                    *buf = '%';
+                    curr_symbol = '%';
                     break;
                 case 'c':
-                    *buf = (unsigned char) va_arg(argptr, int);
+                    curr_symbol = (char) va_arg(argptr, int);
                     break;
                 case 'o':
                     oct((unsigned int) va_arg(argptr, unsigned int), temp);
-                    buf += (copy_to_string(temp, buf) - 1);
+                    if (buf)
+                        copy_to_string(temp, buf + result_len);
+                    result_len += string_len(temp) - 1;
                     break;
                 case 'l':
                     format++;
                     if (*format == 'o')
                     {
                         oct((long unsigned int) va_arg(argptr, long unsigned int), temp);
-                        buf += (copy_to_string(temp, buf) - 1);
+                        if (buf)
+                            copy_to_string(temp, buf + result_len);
+                        result_len += string_len(temp) - 1;
                     }
                     else
-                    {
-                        result = -1;
-                    }
+                        result_len = -1;
                     break;
                 case 's':
-                    buf += (copy_to_string((char *) va_arg(argptr, char *), buf) - 1);
+                    if (buf)
+                        result_len += (copy_to_string((char *) va_arg(argptr, char *), buf + result_len) - 1);
+                    else
+                        result_len += string_len((char *) va_arg(argptr, char *)) - 1;
                     break;
                 default:
-                    *buf = '%';
+                    result_len = -1;
                     break;
             }
         }
         else
-        {
-            *buf = *format;
-        }
-        buf++;
+            curr_symbol = *format;
+
+        if (buf && curr_symbol)
+            buf[result_len] = curr_symbol;
+        result_len++;
         format++;
     }
 
     va_end(argptr);
 
-    if (result != -1)
+    if (buf)
     {
-        *buf = '\0';
-        result = string_len(src);
+        if (result_len > buf_size - 1)
+            buf[buf_size - 1] = '\0';
+        else 
+            buf[result_len] = '\0';
     }
 
-    return result;
+    return result_len;
 }
