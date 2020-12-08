@@ -2,7 +2,6 @@
 
 #include <limits.h>
 #include <stdarg.h>
-#include <stdlib.h>
 
 #define MAX_OCT_LEN ((sizeof(long int) * 8 / 3) + 1)
 
@@ -116,7 +115,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                     buf += (copy_to_string((char *) va_arg(argptr, char *), buf) - 1);
                     break;
                 default:
-                    buf++;
+                    *buf = '%';
                     break;
             }
         }
@@ -130,9 +129,9 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
 
     va_end(argptr);
 
-    if (result != -1 && src)
+    if (result != -1)
     {
-        src[buf_size - 1] = '\0';
+        *buf = '\0';
         result = string_len(src);
     }
 
