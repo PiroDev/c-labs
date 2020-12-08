@@ -79,6 +79,8 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
     va_list argptr;
     va_start(argptr, format);
 
+    char *src = buf;
+
     while (result != -1 && *format)
     {
         if (*format == '%')
@@ -130,7 +132,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
     if (result != -1)
     {
         *buf = '\0';
-        result = string_len(buf);
+        result = string_len(src);
     }
 
     return result;
