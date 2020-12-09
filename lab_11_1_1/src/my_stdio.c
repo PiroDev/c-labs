@@ -64,7 +64,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
 
     va_end(argptr);
 
-    if (buf)
+    if (buf && result_len != -1)
     {
         if ((unsigned)result_len > buf_size - 1)
             buf[buf_size - 1] = '\0';
