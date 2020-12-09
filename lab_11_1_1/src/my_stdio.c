@@ -1,9 +1,14 @@
 #include "../include/my_stdio.h"
 
-#include <limits.h>
 #include <stdarg.h>
 
 #define MAX_OCT_LEN 100
+
+void write_symbol_to_string(char symbol, char *str, int str_len, int pos)
+{
+    if (str && str_len > 0 && pos < str_len)
+        str[pos] = symbol;
+}
 
 int string_len(const char *str)
 {
@@ -21,19 +26,15 @@ int string_len(const char *str)
     return len;
 }
 
-int copy_to_string(char *src, char *dest)
+int copy_to_string(char *src, char *dest, int start_pos, int dest_len)
 {
     int count = 0;
 
-    if (src && dest)
+    while (src && *src)
     {
-        while (*src)
-        {
-            *dest = *src;
-            src++;
-            dest++;
-            count++;
-        }
+        write_symbol_to_string(*src, dest, dest_len, start_pos + count);
+        src++;
+        count++;
     }
 
     return count;
@@ -77,7 +78,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
 {
     int result_len = 0;
 
-    if (buf_size > INT_MAX || buf_size < 0 || !format)
+    if (!format)
         result_len = -1;
 
     va_list argptr;
@@ -100,27 +101,20 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
                     break;
                 case 'o':
                     oct((unsigned int) va_arg(argptr, unsigned int), temp);
-                    if (buf)
-                        copy_to_string(temp, buf + result_len);
-                    result_len += string_len(temp);
+                    result_len += copy_to_string(temp, buf, result_len, buf_size);
                     break;
                 case 'l':
                     format++;
                     if (*format == 'o')
                     {
                         oct((long unsigned int) va_arg(argptr, long unsigned int), temp);
-                        if (buf)
-                            copy_to_string(temp, buf + result_len);
-                        result_len += string_len(temp);
+                        result_len += copy_to_string(temp, buf, result_len, buf_size);
                     }
                     else
                         result_len = -1;
                     break;
                 case 's':
-                    if (buf)
-                        result_len += copy_to_string((char *) va_arg(argptr, char *), buf + result_len);
-                    else
-                        result_len += string_len((char *) va_arg(argptr, char *));
+                    result_len += copy_to_string((char *) va_arg(argptr, char *), buf, result_len, buf_size);
                     break;
                 default:
                     result_len = -1;
@@ -132,8 +126,7 @@ int my_snprintf(char *buf, size_t buf_size, const char *format, ...)
 
         if (curr_symbol)
         {
-            if (buf)
-                buf[result_len] = curr_symbol;
+            write_symbol_to_string(curr_symbol, buf, buf_size, result_len);
             result_len++;
         }
         format++;
