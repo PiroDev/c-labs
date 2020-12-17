@@ -65,6 +65,7 @@ student_t *read_student(FILE *f)
                     student = new_student(name, age, marks, n);
 
                 free(name);
+                free(marks);
             }
         }
         else
