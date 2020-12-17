@@ -4,6 +4,6 @@
 #include "list.h"
 
 node_t *list_push_back(node_t *head, void *data);
-node_t *list_pop_back(node_t *head);
+node_t *list_pop_back(node_t *head, void (*delete_data)(void *));
 
 #endif  // LIST_FUNCTIONS_H_

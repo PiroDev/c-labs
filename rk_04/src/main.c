@@ -28,7 +28,7 @@ int main(void) {
                 break;
 
             case 2:
-                students_list = list_pop_back(students_list);
+                students_list = list_pop_back(students_list, delete_student);
                 break;
 
             case 3:
