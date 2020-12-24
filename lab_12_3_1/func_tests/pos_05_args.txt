@@ -1,0 +1,1 @@
+func_tests/shared/in_05.txt func_tests/shared/out_05.txt f
